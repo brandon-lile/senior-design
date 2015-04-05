@@ -1,0 +1,21 @@
+.page.grid {
+    margin-top:20px;
+}
+.example-pic {
+
+}
+.npc {
+    margin-right: 10px;
+}
+.vertical.pointing {
+    margin-top: 10px !important;
+}
+.pic-ops {
+    margin-left: 15px !important;
+}
+#stats > div {
+    margin-left:13px;
+}
+#misc textarea {
+    max-height:50px;
+}

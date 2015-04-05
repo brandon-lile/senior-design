@@ -12,3 +12,6 @@
 */
 
 Route::get('/', 'HomeController@showHome');
+
+Route::controller('campaign', 'User\CampaignController');
+Route::controller('character', 'User\CharacterController');
