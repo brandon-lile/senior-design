@@ -16,7 +16,10 @@
       "app/database/seeds",
       "app/tests/TestCase.php",
       "app/controllers/User"
-    ]
+    ],
+    "psr-0": {
+      "DungeonCrawler": "app/"
+    }
   },
   "scripts": {
     "post-install-cmd": [
