@@ -5,7 +5,7 @@ class SkillTableSeeder extends Seeder {
 
     public function run(){
 
-        DB::table('skill')->delete();
+        DB::table('skills')->delete();
         Skill::create(
                 array(
                     'value'=>intval(1),

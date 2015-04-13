@@ -12,7 +12,7 @@ class CreateSkillTable extends Migration {
      */
     public function up()
     {
-        Schema::create('skill',function(Blueprint $table)
+        Schema::create('skills',function(Blueprint $table)
         {
             $table->increments('id');
             $table->tinyInteger('value');
@@ -29,7 +29,7 @@ class CreateSkillTable extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('skill');
+        Schema::dropIfExists('skills');
     }
 
 }

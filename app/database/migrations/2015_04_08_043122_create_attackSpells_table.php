@@ -8,12 +8,12 @@ class CreateAttackSpellsTable extends Migration {
 
 	public function up()
 	{
-		Schema::create('attackSpells', function(Blueprint $table)
+		Schema::create('attack_spells', function(Blueprint $table)
         {
             $table->increments('id');
             $table->integer('sheet_id');
             $table->string('name');
-            $table->tiny('atk_bonus');
+            $table->tinyInteger('atk_bonus');
             $table->string('dmg_type');
             $table->timestamps();
         });
@@ -22,7 +22,7 @@ class CreateAttackSpellsTable extends Migration {
 
 	public function down()
 	{
-		Schema::dropIfExists('attackSpells');
+		Schema::dropIfExists('attack_spells');
 	}
 
 }

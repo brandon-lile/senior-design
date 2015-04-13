@@ -13,13 +13,14 @@ class CreateTraitsTable extends Migration {
             $table->integer('sheet_id');
             $table->string('title', 150);
             $table->text('desc');
+            $table->timestamps();
         });
     }
 
 
     public function down()
     {
-        Schema::dropIfExisits('traits');
+        Schema::dropIfExists('traits');
     }
 
 }
