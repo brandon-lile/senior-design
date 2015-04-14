@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder {
         $this->call('CharacterGeneralSeeder');
         $this->call('TreasureTableSeeder');
         $this->call('BackstoryTableSeeder');
+        $this->call('SavingThrowTableSeeder');
     }
 
 }
