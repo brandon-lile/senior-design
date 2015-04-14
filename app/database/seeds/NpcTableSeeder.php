@@ -1,6 +1,6 @@
 <?php
 
-use DungeonCrawler\Objects\Npc;
+use DungeonCrawler\Objects\NPC;
 
 class NpcTableSeeder extends Seeder {
     public function run()
@@ -8,7 +8,7 @@ class NpcTableSeeder extends Seeder {
 
         DB::table('npcs')->delete();
 
-        Npcs::create(
+        NPC::create(
             array(
                 'camp_id' => intval(1),
                 'name' => 'Steve',

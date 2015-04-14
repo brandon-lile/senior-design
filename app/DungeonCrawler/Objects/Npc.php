@@ -1,6 +1,6 @@
 <?php namespace DungeonCrawler\Objects;
 
-class Npc extends \Eloquent {
+class NPC extends \Eloquent {
 
     protected $table = 'npcs';
 
