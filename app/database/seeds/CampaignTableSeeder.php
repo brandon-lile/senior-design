@@ -11,6 +11,7 @@ class CampaignTableSeeder extends Seeder {
 
         Campaigns::create(
             array(
+                'dm_id' => intval(1),
                 'campaign_name' => 'MS&T DND test campaign',
                 'description' => 'This is a description of the Missouri S&T Dungeons and Dragons test campaign.',
 
