@@ -26,7 +26,7 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array('Holly-VAIO'),
+	'local'=>array('winter','fall','Holly-VAIO'),
 
 ));
 

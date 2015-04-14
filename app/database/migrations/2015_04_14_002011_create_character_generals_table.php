@@ -27,6 +27,7 @@ class CreateCharacterGeneralsTable extends Migration {
             $table->string('skin');
             $table->string('hair');
             $table->integer('xp');
+            $table->timestamps();
         });
     }
 

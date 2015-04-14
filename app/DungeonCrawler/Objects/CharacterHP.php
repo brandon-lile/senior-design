@@ -6,7 +6,7 @@ class CharacterHP extends \Eloquent {
 
     protected $guarded = array('id');
 
-    public function characterSheet()
+    public function CharacterSheet()
     {
         return $this->belongsTo('DungeonCrawler\Objects\CharacterSheet', 'sheet_id', 'id');
     }
