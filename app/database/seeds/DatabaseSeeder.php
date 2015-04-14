@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder {
         $this->call('CharacterSheetTableSeeder');
         $this->call('CharSpellTableSeeder');
         $this->call('CharacterGeneralSeeder');
+        $this->call('TreasureTableSeeder');
+        $this->call('BackstoryTableSeeder');
     }
 
 }
