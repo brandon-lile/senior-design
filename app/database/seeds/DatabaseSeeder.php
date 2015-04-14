@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder {
         $this->call('AttackSpellTableSeeder');
         $this->call('CharacterSheetTableSeeder');
         $this->call('CharSpellTableSeeder');
+        $this->call('CharacterGeneralSeeder');
     }
 
 }
