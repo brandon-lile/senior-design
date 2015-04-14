@@ -1,0 +1,33 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateSavingThrowsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+    	Schema::create('saving_throws', function(Blueprint $table)
+    	{
+    		$table->increments('id');
+    		$table->integer('sheet_id');
+    		$table->text('abilities');
+    		$table->timestamps();
+    	});
+    }
+    
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+    	Schema::dropIfExists('saving_throws');
+    }   
+}
