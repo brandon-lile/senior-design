@@ -1,8 +1,8 @@
 <?php namespace DungeonCrawler\Objects;
 
-class CharacterGeneral extends \Eloquent {
+class CharacterHP extends \Eloquent {
 
-    protected $table = 'character_generals';
+    protected $table = 'character_hps';
 
     protected $guarded = array('id');
 

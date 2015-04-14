@@ -10,5 +10,5 @@ class CharacterSheet extends \Eloquent {
     {
         return $this->belongsTo('DungeonCrawler\User', 'user_id', 'id');
     }
- 
+
 }

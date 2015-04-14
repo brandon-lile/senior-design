@@ -5,14 +5,14 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateCharacterGeneralsTable extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('character_generals',function(Blueprint $table){
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('character_generals',function(Blueprint $table){
             $table->increments('id');
             $table->integer('sheet_id');
             $table->string('char_name');
@@ -28,16 +28,16 @@ class CreateCharacterGeneralsTable extends Migration {
             $table->string('hair');
             $table->integer('xp');
         });
-	}
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::dropIfExists('character_generals');
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('character_generals');
+    }
 
 }
