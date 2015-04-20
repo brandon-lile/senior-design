@@ -17,10 +17,11 @@ class DatabaseSeeder extends Seeder {
         $this->call('AttackSpellTableSeeder');
         $this->call('CharacterSheetTableSeeder');
         $this->call('CharSpellTableSeeder');
-        $this->call('CharacterGeneralSeeder');
+        $this->call('CharacterGeneralTableSeeder');
         $this->call('TreasureTableSeeder');
         $this->call('BackstoryTableSeeder');
         $this->call('SavingThrowTableSeeder');
+        $this->call('SpellsTableSeeder');
     }
 
 }
