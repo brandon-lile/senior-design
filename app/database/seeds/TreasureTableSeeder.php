@@ -12,7 +12,7 @@ class TreasureTableSeeder extends Seeder {
             array(
                 'name' => 'Signet Ring',
                 'description' => 'This is indeed a ring',
-                'quanity' => intval(1)
+                'quantity' => intval(1)
             )
         );
     }

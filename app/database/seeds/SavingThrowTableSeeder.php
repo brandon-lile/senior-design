@@ -2,13 +2,13 @@
 
 use DungeonCrawler\Objects\SavingThrow;
 
-class SavingThrow extends Seeder {
+class SavingThrowTableSeeder extends Seeder {
 
     public function run()
     {
         DB::table('saving_throws')->delete();
 
-        CharSpell::create(
+        SavingThrow::create(
             array(
                 'sheet_id' => intval(1),
                 'abilities' => serialize(

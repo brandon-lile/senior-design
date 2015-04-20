@@ -1,4 +1,5 @@
 <?php namespace DungeonCrawler\Objects;
+
 class CharSpell extends \Eloquent {
 
     protected $table = 'char_spells';
@@ -12,6 +13,6 @@ class CharSpell extends \Eloquent {
 
     public function Spell()
     {
-         //return $this->hasOne('DungeonCrawler\Objects\Spell');
+         return $this->hasOne('DungeonCrawler\Objects\Spell');
     }
 }
