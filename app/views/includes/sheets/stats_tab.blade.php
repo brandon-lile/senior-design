@@ -1,4 +1,4 @@
-<div class="ui tab" data-tab="stats">
+<div class="ui active tab" data-tab="stats">
 
     <div class="row">
         <div class="ui sixteen wide column">
@@ -40,13 +40,13 @@
                     </div>
 
                     <!-- Skills -->
-                    <div class="six wide column">
+                    <div class="seven wide column">
                         @include('includes.sheets.hp')
                         @include('includes.sheets.skills')
                     </div>
 
                     <!-- Features and Traits -->
-                    <div class="six wide column">
+                    <div class="three wide column">
                         <div class="ui form">
                             <div class="field">
                                 {{ Form::label('traits', 'Features and Traits') }}

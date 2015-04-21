@@ -4,7 +4,7 @@
     <div class="ui divider"></div>
 
     <div class="ui divided equal height row">
-        <div class="three wide column">
+        <div class="four wide column">
             <div class="ui segment">
                 <img src="{{ asset('images/dnd_character.jpg') }}" class="ui centered rounded image">
                 <div class="ui mini buttons pic-ops">
@@ -14,26 +14,16 @@
                 </div>
             </div>
         </div>
-        <div class="nine wide column">
+        <div class="twelve wide column">
             @include('includes.sheets.class_dropdowns')
         </div>
 
     </div>
 
-
-
     <div class="ui divider"></div>
 
-    @section('inline-js')
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('.tabular.menu .item').tab({history:false});
-        });
-    </script>
-    @append
-
     <div class="ui tabular menu">
-        <div class="item" data-tab="stats">Stats</div>
+        <div class="active item" data-tab="stats">Stats</div>
         <div class="item" data-tab="information">Information</div>
         <div class="item" data-tab="spells">Spells</div>
     </div>
@@ -43,3 +33,11 @@
     @include('includes.sheets.spells_tab')
 
 @stop
+
+@section('inline-js')
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.tabular.menu .item').tab({history:false});
+        });
+    </script>
+@append
