@@ -13,6 +13,7 @@
 </head>
 <body>
     <div class="containment">
+        @include('includes.globals.flash')
         <div class="ui page grid">
             @yield('header')
             @yield('main')
