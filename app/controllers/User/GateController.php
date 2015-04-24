@@ -6,6 +6,8 @@ use Illuminate\View\Factory as View;
 use Illuminate\Routing\Redirector as Redirect;
 use Illuminate\Support\Facades\Session;
 
+use DungeonCrawler\User as User;
+
 class GateController extends \BaseController {
 
     protected $layout = 'layouts.general';
@@ -14,12 +16,15 @@ class GateController extends \BaseController {
 
     private $redirect;
 
-    public function __construct(View $view, Redirect $redirect)
+    private $user;
+
+    public function __construct(View $view, Redirect $redirect, User $user)
     {
         parent::__construct();
 
         $this->view = $view;
         $this->redirect = $redirect;
+        $this->user = $user;
     }
 
     public function getLogin()
@@ -59,7 +64,28 @@ class GateController extends \BaseController {
 
     public function postRegister()
     {
+        $register_user = new User();
+        $register_user->fill(Input::all());
 
+        if ($register_user->isValid(true))
+        {
+            $this->user->fill(Input::except(array('password', 'password_confirm')));
+            $this->user->password = \Hash::make(Input::get('password'));
+            $this->user->save();
+
+            return $this->redirect->to('login');
+        }
+        else
+        {
+            Session::flash('flash_message', array(
+                'header' => 'Registration Failed',
+                'type' => 'red',
+                'close' => true,
+                'body' => $this->user->getPrettyValidatorErrors()
+            ));
+
+            $this->layout->content = $this->view->make('pages.register.index');
+        }
     }
 
 }
