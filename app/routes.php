@@ -13,5 +13,12 @@
 
 Route::get('/', 'HomeController@showHome');
 
+// Login/Registration
+Route::get('login', 'User\GateController@getLogin');
+Route::post('login', 'User\GateController@postLogin');
+Route::get('logout', 'User\GateController@getLogout');
+Route::get('register', 'User\GateController@getRegister');
+Route::post('register', 'User\GateController@postRegister');
+
 Route::controller('campaign', 'User\CampaignController');
 Route::controller('character', 'User\CharacterController');
