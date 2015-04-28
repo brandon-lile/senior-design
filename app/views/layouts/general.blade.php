@@ -9,6 +9,9 @@
 @section('main')
     <div class="ui stackable one column centered grid">
         <div class="sixteen wide column">
+            @include('includes.globals.nonauthheader')
+        </div>
+        <div class="sixteen wide column">
             @yield('content')
         </div>
     </div>

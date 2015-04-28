@@ -1,7 +1,4 @@
 @section('content')
-    <header>
-        @include('includes.globals.nonauthheader')
-    </header>
     <div class="ui blue segment">
         <h2 class="ui dividing header">Register</h2>
         {{ Form::open(array('url' => 'register', 'class' => 'ui form')) }}

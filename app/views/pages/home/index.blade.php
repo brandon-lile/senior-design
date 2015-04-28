@@ -1,8 +1,4 @@
 @section('content')
-    <header>
-        @include('includes.globals.nonauthheader')
-    </header>
-
     <div class="ui blue inverted segment">
         <h3 style="text-align: center;">About Campaign Crawler</h3>
         <p>Dungeon Suave offers Campaign Crawler as an alternative to the tradition pencil and paper method of managing your
