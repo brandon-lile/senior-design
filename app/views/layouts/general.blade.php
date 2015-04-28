@@ -8,7 +8,7 @@
 
 @section('main')
     <div class="ui stackable one column centered grid">
-        <div class="ten wide column">
+        <div class="sixteen wide column">
             @yield('content')
         </div>
     </div>

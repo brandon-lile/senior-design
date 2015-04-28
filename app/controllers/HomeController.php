@@ -1,27 +1,23 @@
 <?php
 
-use DungeonCrawler\User as User;
-use DungeonCrawler\Objects\Spell as Spell;
+use Illuminate\View\Factory as View;
 
 class HomeController extends BaseController {
 
-    public $layout = 'layouts.master';
+    public $layout = 'layouts.general';
+
+    private $view;
+
+    public function __construct(View $view)
+    {
+        parent::__construct();
+
+        $this->view = $view;
+    }
 
     public function showHome()
     {
-
-        $spells = Spell::all();
-        $classes = array();
-        foreach($spells as $spell) {
-            $classes[] = $spell->class;
-        }
-        dd($classes);
-
-        $char_sheets = User::find(1)->CharacterSheets;
-        foreach($char_sheets as $sheet){
-            dd($sheet);
-        }
-        return View::make('home');
+        $this->layout->content = $this->view->make('pages.home.index');
     }
 
 }
