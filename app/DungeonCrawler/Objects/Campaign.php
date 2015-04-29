@@ -29,4 +29,14 @@ class Campaign extends \Eloquent {
 
         return false;
     }
+
+    public function CampaignCharacters()
+    {
+        return $this->hasMany('DungeonCrawler\Objects\CampaignCharacter', 'camp_id', 'id');
+    }
+
+    public function CharacterSheets()
+    {
+        return $this->hasManyThrough('DungeonCrawler\Objects\CharacterSheet', 'DungeonCrawler\Objects\CampaignCharacter', 'camp_id', 'id');
+    }
 }

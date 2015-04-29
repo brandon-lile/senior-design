@@ -21,5 +21,7 @@ Route::get('register', 'User\GateController@getRegister');
 Route::post('register', 'User\GateController@postRegister');
 
 Route::controller('dashboard', 'User\DashboardController');
-Route::controller('campaign', 'User\CampaignController');
+
+Route::get('campaign/{id}', 'User\CampaignController@getIndex');
+
 Route::controller('character', 'User\CharacterController');

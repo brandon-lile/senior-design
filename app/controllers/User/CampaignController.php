@@ -1,5 +1,8 @@
 <?php namespace User;
 
+use DungeonCrawler\Objects\Campaign;
+use DungeonCrawler\Objects\CampaignCharacter;
+
 use Illuminate\View\Factory as View;
 
 class CampaignController extends \BaseController {
@@ -15,8 +18,14 @@ class CampaignController extends \BaseController {
         $this->view = $view;
     }
 
-    public function getIndex()
+    public function getIndex($id = 0)
     {
-        $this->layout->content = $this->view->make('pages.campaign.index');
+        $campaign = Campaign::where('id', intval($id))
+            ->with('CampaignCharacters', 'CharacterSheets')
+            ->firstOrFail();
+
+        dd($campaign);
+        $this->layout->content = $this->view->make('pages.campaign.index')
+                                    ->with('campaign', $campaign);
     }
 }
