@@ -30,6 +30,21 @@ class User extends \Eloquent implements UserInterface, RemindableInterface{
         return $this->hasMany('DungeonCrawler\Objects\CharacterSheet');
     }
 
+    public function CharacterGenerals()
+    {
+        return $this->hasManyThrough('DungeonCrawler\Objects\CharacterGeneral', 'DungeonCrawler\Objects\CharacterSheet', 'user_id', 'sheet_id');
+    }
+
+    public function CampaignCharacters()
+    {
+        return $this->hasManyThrough('DungeonCrawler\Objects\CampaignCharacter', 'DungeonCrawler\Objects\CharacterSheet', 'user_id', 'sheet_id');
+    }
+
+    public function OwnedCampaigns()
+    {
+        return $this->hasMany('DungeonCrawler\Objects\Campaign', 'dm_id', 'id');
+    }
+
     public function getValidatorErrors()
     {
         return $this->errors;
