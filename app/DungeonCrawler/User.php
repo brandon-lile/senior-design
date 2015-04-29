@@ -54,7 +54,7 @@ class User extends \Eloquent implements UserInterface, RemindableInterface{
     {
         $output_string = "The following errors were encountered:<br><ul class='ui list'>";
 
-        foreach($this->errors->all() as $error)
+        foreach($this->errors as $error)
         {
             $output_string .= "<li>" . $error . "</li>";
         }

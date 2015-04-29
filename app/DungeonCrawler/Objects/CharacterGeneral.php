@@ -2,6 +2,7 @@
 
 use DungeonCrawler\Objects\CharacterSheet;
 use DungeonCrawler\Objects\CharacterHP;
+use DungeonCrawler\Objects\Helpers\SpellClass;
 
 use Illuminate\Support\Facades\Validator;
 
@@ -60,7 +61,15 @@ class CharacterGeneral extends \Eloquent {
     );
 
     protected $alignments = array(
-        0 => 'Lawful Good'
+        0 => 'Lawful Good',
+        1 => 'Neutral Good',
+        2 => 'Chaotic Good',
+        3 => 'Lawful Neutral',
+        4 => 'Neutral Neutral',
+        5 => 'Chaotic Neutral',
+        6 => 'Lawful Evil',
+        7 => 'Neutral Evil',
+        8 => 'Chaotic Evil'
     );
 
     protected $backgrounds = array(
@@ -76,14 +85,6 @@ class CharacterGeneral extends \Eloquent {
         10 => 'Painter',
         11 => 'Potter',
         12 => 'Weaver'
-    );
-
-    protected $classes = array(
-        0 => 'Fighter',
-        1 => 'Wizard',
-        2 => 'Cleric',
-        3 => 'Rogue',
-        4 => 'Ranger'
     );
 
     public function raceToDropdown()
@@ -103,6 +104,13 @@ class CharacterGeneral extends \Eloquent {
 
     public function classToDropdown()
     {
-        return $this->classes;
+        $tmpClasses = SpellClass::orderBy('class', 'ASC')->get();
+        $classes = array();
+
+        foreach ($tmpClasses as $class)
+        {
+            $classes[$class->id] = $class->class;
+        }
+        return $classes;
     }
 }
