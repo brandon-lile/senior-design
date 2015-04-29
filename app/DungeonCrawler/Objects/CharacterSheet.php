@@ -43,4 +43,20 @@ class CharacterSheet extends \Eloquent {
         });
     }
 
+    /*
+    public function getProficienciesAttribute($prof)
+    {
+        $clean_array = unserialize($prof);
+        $return_array = array();
+
+        foreach($clean_array as $skill_id => $skill_val)
+        {
+            $return_array[] = array(
+                0 => array(
+                    'value' => $skill_val,
+                    'modifier' =>
+                )
+            );
+        }
+    }*/
 }

@@ -17,15 +17,18 @@
                                 <!-- Throws -->
                                 <div class="eleven wide column">
                                     <div class="ui left labeled input">
-                                        <div class="ui red label">
-                                            Inspiration
-                                        </div>
-                                        {{ Form::number('inspiration', 0) }}
+                                            <div class="ui red label">
+                                                {{ Form::label('inspiration') }}
+                                            </div>
+                                            <div class="ui mini toggle checkbox">
+                                                {{ Form::checkbox('inspiration', 'Inspiration') }}
+                                            </div>
+
                                     </div>
                                     <br /><br />
                                     <div class="ui left labeled input">
                                         <div class="ui red label">
-                                            Proficiency Bonus
+                                            Proficiency <br> Bonus
                                         </div>
                                         {{ Form::number('prof_bonus', 0) }}
                                     </div>
@@ -45,16 +48,7 @@
                         @include('includes.sheets.skills')
                     </div>
 
-                    <!-- Features and Traits -->
-                    <div class="three wide column">
-                        <div class="ui form">
-                            <div class="field">
-                                {{ Form::label('traits', 'Features and Traits') }}
-                                {{ Form::textarea('traits') }}
-                            </div>
-                        </div>
 
-                    </div>
 
 
                 </div>

@@ -6,9 +6,6 @@
                 <div class="equal height row">
 
                     <div class="five wide column">
-                        <div class="ui red label">
-                            0
-                        </div>
 
                         <div class="ui red label">
                             Cantrips
