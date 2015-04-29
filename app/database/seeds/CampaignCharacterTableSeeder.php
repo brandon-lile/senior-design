@@ -1,6 +1,6 @@
 <?php
 
-use DungeonCrawler\Objects\CharSpell;
+use DungeonCrawler\Objects\CampaignCharacter;
 
 class CampaignCharacterTableSeeder extends Seeder {
 
@@ -13,7 +13,6 @@ class CampaignCharacterTableSeeder extends Seeder {
             array(
                 'sheet_id' => intval(1),
                 'camp_id' => intval(1),
-
             )
         );
     }
