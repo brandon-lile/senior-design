@@ -9,7 +9,7 @@ class CampaignTableSeeder extends Seeder {
 
         DB::table('campaigns')->delete();
 
-        Campaigns::create(
+        Campaign::create(
             array(
                 'dm_id' => intval(1),
                 'campaign_name' => 'MS&T DND test campaign',

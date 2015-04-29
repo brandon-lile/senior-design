@@ -2,7 +2,7 @@
 
 class CampaignCharacter extends \Eloquent{
 
-    protected $table = 'campaign_character';
+    protected $table = 'campaign_characters';
 
     protected $guarded = array('id');
 

@@ -20,5 +20,6 @@ Route::get('logout', 'User\GateController@getLogout');
 Route::get('register', 'User\GateController@getRegister');
 Route::post('register', 'User\GateController@postRegister');
 
+Route::controller('dashboard', 'User\DashboardController');
 Route::controller('campaign', 'User\CampaignController');
 Route::controller('character', 'User\CharacterController');
