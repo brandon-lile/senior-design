@@ -9,9 +9,10 @@
                         <div class="ui center aligned grid">
                             <div class="ui divided equal height row">
                                 <!-- Stats -->
-                                <div class="five wide column">
+                                <div class="eleven wide column">
                                     <h2 class="ui header">Stats</h2>
                                     @include('includes.sheets.stats')
+                                    @include('includes.sheets.equipment')
                                 </div>
 
                                 <!-- Throws -->
@@ -33,20 +34,18 @@
                                         {{ Form::number('prof_bonus', 0) }}
                                     </div>
                                     @include('includes.sheets.throws')
+                                    @include('includes.sheets.treasure')
                                 </div>
-                            </div>
-
-                            <div class="ui sixteen wide column">
-                                @include('includes.sheets.equipment')
+                                <!-- Skills -->
+                                <div class="sixteen wide column">
+                                    @include('includes.sheets.hp')
+                                    @include('includes.sheets.skills')
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Skills -->
-                    <div class="seven wide column">
-                        @include('includes.sheets.hp')
-                        @include('includes.sheets.skills')
-                    </div>
+
 
 
 

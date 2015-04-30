@@ -43,7 +43,7 @@ class CharacterSheet extends \Eloquent {
         });
     }
 
-    /*
+
     public function getProficienciesAttribute($prof)
     {
         $clean_array = unserialize($prof);
@@ -54,9 +54,9 @@ class CharacterSheet extends \Eloquent {
             $return_array[] = array(
                 0 => array(
                     'value' => $skill_val,
-                    'modifier' =>
+                    'modifier' => ($skill_val - 10)/2
                 )
             );
         }
-    }*/
+    }
 }
