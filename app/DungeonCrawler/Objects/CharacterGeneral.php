@@ -2,6 +2,7 @@
 
 use DungeonCrawler\Objects\CharacterSheet;
 use DungeonCrawler\Objects\CharacterHP;
+use DungeonCrawler\Objects\Helpers\SpellClass;
 
 use Illuminate\Support\Facades\Validator;
 
@@ -56,26 +57,38 @@ class CharacterGeneral extends \Eloquent {
         2 => 'Dwarf',
         3 => 'Halfling',
         4 => 'Gnome',
-        5 => 'Half-Orc'
+        5 => 'Half-Orc',
+        6 => 'Dragonborn',
+        7 => 'Half-elf',
+        8 => 'Tiefling'
     );
 
     protected $alignments = array(
-        0 => 'Lawful Good'
+        0 => 'Lawful Good',
+                1 => 'Neutral Good',
+                2 => 'Chaotic Good',
+                3 => 'Lawful Neutral',
+                4 => 'Neutral Neutral',
+                5 => 'Chaotic Neutral',
+                6 => 'Lawful Evil',
+                7 => 'Neutral Evil',
+                8 => 'Chaotic Evil'
     );
 
     protected $backgrounds = array(
-        1 => 'Blacksmith',
-        2 => 'Bowyer of Fletcher',
-        3 => 'Brewer',
-        4 => 'Calligrapher',
-        5 => 'Carpenter',
-        6 => 'Cartographer',
-        7 => 'Cook',
-        8 => 'Goldsmith/Silversmith',
-        9 => 'Jeweler',
-        10 => 'Painter',
-        11 => 'Potter',
-        12 => 'Weaver'
+        1 => 'Acolyte',
+        2 => 'Charlatan',
+        3 => 'Criminal',
+        4 => 'Entertainer',
+        5 => 'Folk Hero',
+        6 => 'Guild Artisan',
+        7 => 'Hermit',
+        8 => 'Noble',
+        9 => 'Outlander',
+        10 => 'Sage',
+        11 => 'Sailor',
+        12 => 'Soldier',
+        13 => 'Urchin'
     );
 
     protected $classes = array(
@@ -103,6 +116,12 @@ class CharacterGeneral extends \Eloquent {
 
     public function classToDropdown()
     {
-        return $this->classes;
+        $tmpClasses = SpellClass::orderBy('class', 'ASC')->get();
+        $classes = array();
+        foreach ($tmpClasses as $class)
+        {
+            $classes[$class->id] = $class->class;
+        }
+      return $classes;
     }
 }
