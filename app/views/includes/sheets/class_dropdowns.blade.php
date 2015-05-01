@@ -16,7 +16,7 @@
     <div class="three fields">
         <div class="field">
             {{ Form::label('race', 'Race') }}
-            {{ Form::select('race', $class_dropdown, 0, array('class' => 'ui dropdown')) }}
+            {{ Form::select('race', $race_dropdown, 0, array('class' => 'ui dropdown')) }}
         </div>
         <div class="field">
             {{ Form::label('alignment', 'Alignment') }}

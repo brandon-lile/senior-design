@@ -73,18 +73,19 @@ class CharacterGeneral extends \Eloquent {
     );
 
     protected $backgrounds = array(
-        1 => 'Blacksmith',
-        2 => 'Bowyer of Fletcher',
-        3 => 'Brewer',
-        4 => 'Calligrapher',
-        5 => 'Carpenter',
-        6 => 'Cartographer',
-        7 => 'Cook',
-        8 => 'Goldsmith/Silversmith',
-        9 => 'Jeweler',
-        10 => 'Painter',
-        11 => 'Potter',
-        12 => 'Weaver'
+        1 => 'Acolyte',
+        2 => 'Charlatan',
+        3 => 'Criminal',
+        4 => 'Entertainer',
+        5 => 'Folk Hero',
+        6 => 'Guild Artisan',
+        7 => 'Hermit',
+        8 => 'Noble',
+        9 => 'Outlander',
+        10 => 'Sage',
+        11 => 'Sailor',
+        12 => 'Soldier',
+        13 => 'Urchin'
     );
 
     protected $classes = array(
