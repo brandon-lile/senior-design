@@ -18,7 +18,7 @@ class User extends \Eloquent implements UserInterface, RemindableInterface{
 
     protected static $rules_register = array(
         'email' => 'required|email|unique:users',
-        'username' => 'required|unique:users',
+        'username' => 'required|min:6|unique:users',
         'password' => 'required|min:8',
         'password_confirm' => 'required|same:password'
     );
