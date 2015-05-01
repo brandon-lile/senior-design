@@ -57,7 +57,10 @@ class CharacterGeneral extends \Eloquent {
         2 => 'Dwarf',
         3 => 'Halfling',
         4 => 'Gnome',
-        5 => 'Half-Orc'
+        5 => 'Half-Orc',
+        6 => 'Dragonborn',
+        7 => 'Half-elf',
+        8 => 'Tiefling'
     );
 
     protected $alignments = array(
