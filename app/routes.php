@@ -28,5 +28,8 @@ Route::post('settings/changepassword', 'User\SettingsController@postChangePasswo
 
 Route::controller('dashboard', 'User\DashboardController');
 Route::controller('campaign', 'User\CampaignController');
-Route::controller('character', 'User\CharacterController');
 
+// Character Sheet
+Route::get('character/{id}', 'User\CharacterController@getSheet');
+
+Route::patch('character/patchability', 'User\CharacterController@patchAbility');

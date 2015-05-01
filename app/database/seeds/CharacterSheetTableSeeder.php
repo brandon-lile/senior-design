@@ -15,8 +15,12 @@ class CharacterSheetTableSeeder extends Seeder {
                 'user_id' => intval(1),
                 'abilities' => serialize(
                     array(
-                        0 => intval(17),
-                        1 => intval(12),
+                        0 => intval(1),
+                        1 => intval(0),
+                        2 => intval(3),
+                        3 => intval(4),
+                        4 => intval(5),
+                        5 => intval(6)
                     )
                 ),
                 'insp' => intval(1),

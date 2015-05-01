@@ -27,12 +27,12 @@
                     @if (isset($sheets) && count($sheets) > 0)
                         <div class="ui divided list selection item-container">
                             @foreach ($sheets as $sheet)
-                                <div class="item">
+                                <a class="item" href="{{ url('character') . "/" . $sheet->id }}">
                                     <div class="right floated compact ui red button">Delete</div>
                                     <div class="content">
                                         {{ $sheet->charactergeneral->char_name }}
                                     </div>
-                                </div>
+                                </a>
                             @endforeach
                         </div>
                     @else
