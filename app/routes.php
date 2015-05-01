@@ -19,7 +19,12 @@ Route::post('login', 'User\GateController@postLogin');
 Route::get('logout', 'User\GateController@getLogout');
 Route::get('register', 'User\GateController@getRegister');
 Route::post('register', 'User\GateController@postRegister');
-Route::controller('settings', 'User\SettingsController');
+
+// Settings
+Route::get('settings', 'User\SettingsController@getIndex');
+Route::post('settings/changeemail', 'User\SettingsController@postChangeEmail');
+Route::post('settings/changeusername', 'User\SettingsController@postChangeUsername');
+Route::post('settings/changepassword', 'User\SettingsController@postChangePassword');
 
 Route::controller('dashboard', 'User\DashboardController');
 Route::controller('campaign', 'User\CampaignController');

@@ -16,8 +16,22 @@ class SettingsController extends \BaseController {
 
     public function getIndex()
     {
-        $this->layout->content = $this->view->make('pages.settings.index');
+        $this->layout->content = $this->view->make('pages.settings.index')
+                                    ->with('user', \Auth::user());
     }
 
+    public function postChangeUsername()
+    {
 
+    }
+
+    public function postChangeEmail()
+    {
+
+    }
+
+    public function postChangePassword()
+    {
+
+    }
 }
