@@ -20,6 +20,13 @@ Route::get('logout', 'User\GateController@getLogout');
 Route::get('register', 'User\GateController@getRegister');
 Route::post('register', 'User\GateController@postRegister');
 
+// Settings
+Route::get('settings', 'User\SettingsController@getIndex');
+Route::post('settings/changeemail', 'User\SettingsController@postChangeEmail');
+Route::post('settings/changeusername', 'User\SettingsController@postChangeUsername');
+Route::post('settings/changepassword', 'User\SettingsController@postChangePassword');
+
 Route::controller('dashboard', 'User\DashboardController');
 Route::controller('campaign', 'User\CampaignController');
 Route::controller('character', 'User\CharacterController');
+
