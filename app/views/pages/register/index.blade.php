@@ -4,11 +4,11 @@
         {{ Form::open(array('url' => 'register', 'class' => 'ui form')) }}
             <div class="field">
                 {{ Form::label('username', 'Username') }}
-                {{ Form::text('username', '', array('placeholder' => 'Username', 'id' => 'username')) }}
+                {{ Form::text('username', Input::old('username'), array('placeholder' => 'Username', 'id' => 'username')) }}
             </div>
             <div class="field">
                 {{ Form::label('email', 'Email') }}
-                {{ Form::text('email', '', array('placeholder' => 'example@mail.com', 'id' => 'email')) }}
+                {{ Form::text('email', Input::old('email'), array('placeholder' => 'example@mail.com', 'id' => 'email')) }}
             </div>
             <div class="field">
                 {{ Form::label('password', 'Password') }}

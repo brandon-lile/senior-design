@@ -20,6 +20,8 @@ class SettingsController extends \BaseController {
 
     public function __construct(View $view, Request $request, Redirect $redirect)
     {
+        $this->beforeFilter('auth');
+
         parent::__construct();
 
         $this->view = $view;

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\View\Factory as View;
+use Illuminate\Routing\Redirector as Redirect;
 
 class HomeController extends BaseController {
 
@@ -17,6 +18,11 @@ class HomeController extends BaseController {
 
     public function showHome()
     {
+        if (\Auth::user() != null)
+        {
+            return \Redirect::to('dashboard');
+        }
+
         $this->layout->content = $this->view->make('pages.home.index');
     }
 

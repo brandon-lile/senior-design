@@ -23,6 +23,8 @@ class DashboardController extends \BaseController {
 
     public function __construct(View $view, Request $request, Redirect $redirect, CharacterGeneral $characterGeneral)
     {
+        $this->beforeFilter('auth');
+
         parent::__construct();
 
         $this->view = $view;

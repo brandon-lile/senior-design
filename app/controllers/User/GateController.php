@@ -81,10 +81,12 @@ class GateController extends \BaseController {
                 'header' => 'Registration Failed',
                 'type' => 'red',
                 'close' => true,
-                'body' => $this->user->getPrettyValidatorErrors()
+                'body' => ''
             ));
 
-            $this->layout->content = $this->view->make('pages.register.index');
+            return $this->redirect->action('User\GateController@getRegister')
+                ->withErrors($register_user->getValidatorErrors())
+                ->withInput(Input::except('password', 'password_confirm'));
         }
     }
 

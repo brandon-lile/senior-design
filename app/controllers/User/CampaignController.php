@@ -10,6 +10,8 @@ class CampaignController extends \BaseController {
 
     public function __construct(View $view)
     {
+        $this->beforeFilter('auth');
+
         parent::__construct();
 
         $this->view = $view;
