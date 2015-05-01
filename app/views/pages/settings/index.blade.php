@@ -59,7 +59,7 @@
                     {{ Form::open(array('url' => action('User\SettingsController@postChangeEmail'), 'class' => 'ui form')) }}
                         <div class="field">
                             {{ Form::label('email', 'New Email') }}
-                            {{ Form::text('Email', '', array('placeholder' => 'New email', 'id' => 'email')) }}
+                            {{ Form::text('email', '', array('placeholder' => 'New email', 'id' => 'email')) }}
                         </div>
                         {{ Form::submit('Update email', array('class' => 'ui green submit button')) }}
                     {{ Form::close() }}

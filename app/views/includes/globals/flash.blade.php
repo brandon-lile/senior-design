@@ -10,7 +10,30 @@
             </div>
         @endif
 
-        {{ $message['body'] or '' }}
+        @if (isset($errors) && $errors->all() != null)
+            The following errors were encountered: <br />
+            <ul class="ui list">
+                @foreach ($errors->all('<li>:message</li>') as $message)
+                    {{ $message }}
+                @endforeach
+            </ul>
+        @else
+            {{ $message['body'] or '' }}
+        @endif
+    </div>
+@elseif (isset($errors) && $errors->all() != null)
+    <div class="ui column sixteen wide red message">
+        <i class="close icon"></i>
+
+        <div class="header">
+            The following errors were encountered:
+        </div>
+
+        <ul class="ui list">
+            @foreach ($errors->all('<li>:message</li>') as $message)
+                {{ $message }}
+            @endforeach
+        </ul>
     </div>
 @endif
 
