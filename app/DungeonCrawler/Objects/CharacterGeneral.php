@@ -42,8 +42,12 @@ class CharacterGeneral extends \Eloquent {
         }
 
         $this->errors = $validation->messages();
-        dd($this->errors);
         return false;
+    }
+
+    public function getValidatorErrors()
+    {
+        return $this->errors;
     }
 
     /*************************************************************************

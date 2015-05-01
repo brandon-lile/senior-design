@@ -29,4 +29,9 @@ class Campaign extends \Eloquent {
 
         return false;
     }
+
+    public function getValidatorErrors()
+    {
+        return $this->errors;
+    }
 }

@@ -63,7 +63,9 @@ class DashboardController extends \BaseController {
         }
         else
         {
-
+            return $this->redirect->to('dashboard')
+                    ->withErrors($campaign->getValidatorErrors(), 'campaign')
+                    ->withInput($this->request->all());
         }
     }
 
@@ -84,7 +86,9 @@ class DashboardController extends \BaseController {
         }
         else
         {
-
+            return $this->redirect->to('dashboard')
+                    ->withErrors($charGen->getValidatorErrors(), 'character')
+                    ->withInput($this->request->all());
         }
     }
 
