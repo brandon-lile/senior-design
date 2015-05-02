@@ -4,7 +4,6 @@
         <div class="ui sixteen wide column">
             <div class="ui center aligned divided grid">
                 <div class="equal height row">
-
                     <div class="twelve wide column">
                         <!-- Features and Traits -->
                         <div class="ui green raised segment">
