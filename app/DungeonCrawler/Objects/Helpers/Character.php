@@ -40,11 +40,10 @@ class Character {
 
         foreach($abilities as $skill_id => $skill_val)
         {
-            $bonus = floor(($skill_val - 10) / 2);
             $return_array[$skill_id] = array(
                 'name' => $this->ability_id_to_name[$skill_id],
                 'value' => $skill_val,
-                'bonus' => ($bonus > 0) ? $bonus : 0
+                'bonus' => floor(($skill_val - 10) / 2)
             );
         }
 
@@ -53,7 +52,6 @@ class Character {
 
     public function getAbilityBonus($value)
     {
-        $bonus = floor(($value - 10) / 2);
-        return ($bonus > 0) ? $bonus : 0;
+        return floor(($value - 10) / 2);
     }
 }
