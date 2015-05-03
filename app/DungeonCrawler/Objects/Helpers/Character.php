@@ -34,6 +34,11 @@ class Character {
         return $this->ability_name_to_id;
     }
 
+    public function abilityIdToName()
+    {
+        return $this->ability_id_to_name;
+    }
+
     public function prettifyAbilities($abilities, $bonus = true)
     {
         $return_array = array();

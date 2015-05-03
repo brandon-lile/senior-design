@@ -5,6 +5,8 @@ use DungeonCrawler\Objects\CharacterGeneral;
 use DungeonCrawler\Objects\CharacterSheet;
 use DungeonCrawler\Objects\Helpers\Character;
 use DungeonCrawler\Objects\SavingThrow;
+use DungeonCrawler\Objects\Skill;
+use DungeonCrawler\Objects\Helpers\SkillsHelper;
 
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Application as App;
@@ -24,7 +26,9 @@ class CharacterController extends \BaseController{
 
     private $character;
 
-    public function __construct(View $view, CharacterGeneral $characterGeneral, App $app, Request $request, Character $character)
+    private $skills;
+
+    public function __construct(View $view, CharacterGeneral $characterGeneral, App $app, Request $request, Character $character, SkillsHelper $skillsHelper)
     {
         $this->beforeFilter('auth');
 
@@ -35,6 +39,7 @@ class CharacterController extends \BaseController{
         $this->app = $app;
         $this->request = $request;
         $this->character = $character;
+        $this->skills = $skillsHelper;
     }
 
     public function getSheet($id = 0)
@@ -48,7 +53,10 @@ class CharacterController extends \BaseController{
                                     ->with('background_dropdown', $this->characterGeneral->backgroundToDropdown())
                                     ->with('alignment_dropdown', $this->characterGeneral->alignmentToDropdown())
                                     ->with('race_dropdown', $this->characterGeneral->raceToDropdown())
-                                    ->with('sheet', $sheet);
+                                    ->with('sheet', $sheet)
+                                    ->with('skills_output', $this->skills->getSkillsOutputArray())
+                                    ->with('ability_ids', $this->character->abilityIdToName())
+                                    ->with('skills_choices', $this->skills->getSkillsChoiceDropdown());
     }
 
     /************************************************************************
@@ -117,6 +125,34 @@ class CharacterController extends \BaseController{
                 $throws->save();
 
                 return \Response::json(true);
+            }
+            else
+            {
+                $this->app->abort(404);
+            }
+        }
+        catch (ModelNotFoundException $e)
+        {
+            $this->app->abort(404);
+        }
+    }
+
+    public function patchSkills()
+    {
+        try
+        {
+            $skills = Skill::where('sheet_id', intval($this->request->get('sheet')))->firstOrFail();
+            $new_skills = $skills->skills;
+            $clean_skills = $this->skills->getCleanSkills();
+
+            if (isset($new_skills[$clean_skills[$this->request->get('skill')]]))
+            {
+                $new_skills[$clean_skills[$this->request->get('skill')]] = intval($this->request->get('value'));
+                $skills->skills = array();
+                $skills->skills = $new_skills;
+                $skills->save();
+
+                return \Response::json($new_skills);
             }
             else
             {

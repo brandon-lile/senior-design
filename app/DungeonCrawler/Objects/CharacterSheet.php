@@ -16,7 +16,7 @@ class CharacterSheet extends \Eloquent {
 
     public function scopeAll($query)
     {
-        return $query->with('CharacterGeneral', 'CharacterHP', 'SavingThrows');
+        return $query->with('CharacterGeneral', 'CharacterHP', 'SavingThrows', 'Skill');
     }
 
     /************************************************************************
@@ -48,6 +48,11 @@ class CharacterSheet extends \Eloquent {
         return $this->hasOne('DungeonCrawler\Objects\SavingThrow', 'sheet_id', 'id');
     }
 
+    public function Skill()
+    {
+        return $this->hasOne('DungeonCrawler\Objects\Skill', 'sheet_id', 'id');
+    }
+
     /************************************************************************
      * Boot Method
      ***********************************************************************/
@@ -71,6 +76,9 @@ class CharacterSheet extends \Eloquent {
                 5 => 0
             );
             $charSheet->SavingThrows()->save($throws);
+
+            $skills = new Skill();
+            $charSheet->Skill()->save($skills);
 
             $charSheet->abilities = array(
                 0 => 0,
