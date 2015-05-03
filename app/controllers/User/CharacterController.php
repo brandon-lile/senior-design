@@ -4,6 +4,7 @@ use Illuminate\View\Factory as View;
 use DungeonCrawler\Objects\CharacterGeneral;
 use DungeonCrawler\Objects\CharacterSheet;
 use DungeonCrawler\Objects\Helpers\Character;
+use DungeonCrawler\Objects\SavingThrow;
 
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Application as App;
@@ -39,7 +40,8 @@ class CharacterController extends \BaseController{
     public function getSheet($id = 0)
     {
         $sheet = CharacterSheet::where('id', $id)->All()->first();
-        $sheet->abilities = $this->character->prettifyAbilities($sheet->abilities);
+        $sheet->abilities = $this->character->prettifyAbilities($sheet->abilities, true);
+        $sheet->savingthrows->abilities = $this->character->prettifyAbilities($sheet->savingthrows->abilities, false);
 
         $this->layout->content = $this->view->make('pages.character.sheet')
                                     ->with('class_dropdown', $this->characterGeneral->classToDropdown())
@@ -98,6 +100,33 @@ class CharacterController extends \BaseController{
         }
 
         $this->app->abort(404);
+    }
+
+    public function patchSavingThrow()
+    {
+        try
+        {
+            $throws = SavingThrow::where('sheet_id', intval($this->request->get('sheet')))->firstOrFail();
+            $abilityToId = $this->character->AbilityNameToId();
+            $new_abilities = $throws->abilities;
+
+            if(isset($new_abilities[$abilityToId[$this->request->get('field')]]))
+            {
+                $new_abilities[$abilityToId[$this->request->get('field')]] = intval(boolval($this->request->get('value')));
+                $throws->abilities = $new_abilities;
+                $throws->save();
+
+                return \Response::json(true);
+            }
+            else
+            {
+                $this->app->abort(404);
+            }
+        }
+        catch (ModelNotFoundException $e)
+        {
+            $this->app->abort(404);
+        }
     }
 
     /************************************************************************

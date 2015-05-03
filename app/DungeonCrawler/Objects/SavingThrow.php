@@ -10,4 +10,18 @@ class SavingThrow extends \Eloquent{
     {
         return $this->belongsTo('DungeonCrawler\Objects\CharacterSheet', 'sheet_id', 'id');
     }
+
+    /************************************************************************
+     * Accessors and Mutators
+     ***********************************************************************/
+
+    public function getAbilitiesAttribute($value)
+    {
+        return unserialize($value);
+    }
+
+    public function setAbilitiesAttribute($value)
+    {
+        $this->attributes['abilities'] = serialize($value);
+    }
 }

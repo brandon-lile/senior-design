@@ -1,40 +1,40 @@
-<div class="ui raised red segment">
+<div class="ui raised red segment" id="saving_throws">
     <h2 class="ui red header">Saving Throws</h2>
         <div class="ui segment">
-            <div class="ui toggle checkbox">
-                {{ Form::checkbox('strength_throw', 'strength_throw') }}
-                {{ Form::label('strength_throw', 'Strength') }}
-            </div>
-            <div class="ui divider"></div>
-            <div class="ui toggle checkbox">
-                {{ Form::checkbox('dexterity_throw', 'dexterity_throw') }}
-                {{ Form::label('dexterity_throw', 'Dexterity') }}
-            </div>
-            <div class="ui divider"></div>
-            <div class="ui toggle checkbox">
-                {{ Form::checkbox('const_throw', 'const_throw') }}
-                {{ Form::label('const_throw', 'Constitution') }}
-            </div>
-            <div class="ui divider"></div>
-            <div class="ui toggle checkbox">
-                {{ Form::checkbox('int_throw', 'int_throw') }}
-                {{ Form::label('int_throw', 'Intelligence') }}
-            </div>
-            <div class="ui divider"></div>
-            <div class="ui toggle checkbox">
-                {{ Form::checkbox('wisdom_throw', 'wisdom_throw') }}
-                {{ Form::label('wisdom_throw', 'Wisdom') }}
-            </div>
-            <div class="ui divider"></div>
-            <div class="ui toggle checkbox">
-                {{ Form::checkbox('charisma_throw', 'charisma_throw') }}
-                {{ Form::label('charisma_throw', 'Charisma') }}
-            </div>
+            @foreach ($sheet->savingthrows->abilities as $ability)
+                <div class="ui toggle checkbox">
+                    {{ Form::checkbox(strtolower($ability['name'] . "_throw"), $ability['value'], $ability['value']) }}
+                    {{ Form::label(strtolower($ability['name'] . "_throw"), $ability['name']) }}
+                </div>
+                <div class="ui divider"></div>
+            @endforeach
         </div>
 </div>
 
 @section('inline-js')
     <script type="text/javascript">
         $('.ui.checkbox').checkbox();
+
+        $("#saving_throws input[type=checkbox]").on("change", function()
+        {
+            var name = $(this).attr('name');
+            var params = {
+                'sheet' : "{{ $sheet->id }}",
+                'field' : name.substr(0, name.indexOf('_')),
+                'value' : (parseInt($(this).val())) ? 0 : 1
+            }
+
+            $.ajax({
+                type: "PATCH",
+                data: params,
+                url: "{{ action('User\CharacterController@patchSavingThrow') }}",
+                success: function(data){
+                    if(data === true) {
+                        // Change the val on checkbox
+                        $("#saving_throws input[name=" + params['field'] + "_throw]").val(parseInt(params['value']));
+                    }
+                }
+            });
+        });
     </script>
 @append

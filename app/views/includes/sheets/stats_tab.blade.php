@@ -14,7 +14,7 @@
                             {{ Form::label('inspiration') }}
                         </div>
                         <div class="ui mini toggle checkbox">
-                            {{ Form::checkbox('inspiration', 'Inspiration') }}
+                            {{ Form::checkbox('inspiration', 'Inspiration', ($sheet->insp) ? true : false) }}
                         </div>
 
                 </div>

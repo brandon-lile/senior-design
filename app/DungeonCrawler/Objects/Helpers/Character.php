@@ -34,7 +34,7 @@ class Character {
         return $this->ability_name_to_id;
     }
 
-    public function prettifyAbilities($abilities)
+    public function prettifyAbilities($abilities, $bonus = true)
     {
         $return_array = array();
 
@@ -43,8 +43,12 @@ class Character {
             $return_array[$skill_id] = array(
                 'name' => $this->ability_id_to_name[$skill_id],
                 'value' => $skill_val,
-                'bonus' => floor(($skill_val - 10) / 2)
             );
+
+            if($bonus === true)
+            {
+                $return_array[$skill_id]['bonus'] = floor(($skill_val - 10) / 2);
+            }
         }
 
         return $return_array;

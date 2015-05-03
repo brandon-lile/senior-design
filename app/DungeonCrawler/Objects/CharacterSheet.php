@@ -15,7 +15,7 @@ class CharacterSheet extends \Eloquent {
 
     public function scopeAll($query)
     {
-        return $query->with('CharacterGeneral', 'CharacterHP');
+        return $query->with('CharacterGeneral', 'CharacterHP', 'SavingThrows');
     }
 
     /************************************************************************
@@ -40,6 +40,11 @@ class CharacterSheet extends \Eloquent {
     public function Campaign()
     {
         return $this->hasManyThrough('DungeonCrawler\Objects\Campaign', 'DungeonCrawler\Objects\CampaignCharacter', 'sheet_id', 'id');
+    }
+
+    public function SavingThrows()
+    {
+        return $this->hasOne('DungeonCrawler\Objects\SavingThrow', 'sheet_id', 'id');
     }
 
     /************************************************************************
