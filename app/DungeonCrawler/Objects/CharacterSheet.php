@@ -2,6 +2,7 @@
 
 use DungeonCrawler\Objects\CharacterHP;
 use DungeonCrawler\Objects\Helpers\Character;
+use DungeonCrawler\Objects\SavingThrow;
 
 class CharacterSheet extends \Eloquent {
 
@@ -59,6 +60,17 @@ class CharacterSheet extends \Eloquent {
         {
             $charHP = new CharacterHP();
             $charSheet->CharacterHP()->save($charHP);
+
+            $throws = new SavingThrow();
+            $throws->abilities = array(
+                0 => 0,
+                1 => 0,
+                2 => 0,
+                3 => 0,
+                4 => 0,
+                5 => 0
+            );
+            $charSheet->SavingThrows()->save($throws);
 
             $charSheet->abilities = array(
                 0 => 0,

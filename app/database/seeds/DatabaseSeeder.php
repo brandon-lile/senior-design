@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder {
         $this->call('CharacterGeneralTableSeeder');
         $this->call('TreasureTableSeeder');
         $this->call('BackstoryTableSeeder');
-        $this->call('SavingThrowTableSeeder');
         $this->call('SpellsTableSeeder');
         $this->call('CampaignTableSeeder');
         $this->call('CampaignCharacterTableSeeder');
