@@ -33,3 +33,4 @@ Route::controller('campaign', 'User\CampaignController');
 Route::get('character/{id}', 'User\CharacterController@getSheet');
 
 Route::patch('character/patchability', 'User\CharacterController@patchAbility');
+Route::patch('character/patchClassAttr/{field}', 'User\CharacterController@patchClassAttr');

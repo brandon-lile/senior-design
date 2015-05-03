@@ -77,6 +77,29 @@ class CharacterController extends \BaseController{
         }
     }
 
+    public function patchClassAttr($attr)
+    {
+        $attr_array = array('class', 'race', 'alignment', 'background', 'level', 'xp');
+
+        if(in_array($attr, $attr_array))
+        {
+            try
+            {
+                $sheet = CharacterGeneral::where('sheet_id', intval($this->request->get('sheet')))->firstOrFail();
+                $sheet[$attr] = intval($this->request->get('value'));
+                $sheet->save();
+
+                return \Response::json(true);
+            }
+            catch (ModelNotFoundException $e)
+            {
+                $this->app->abort(404);
+            }
+        }
+
+        $this->app->abort(404);
+    }
+
     /************************************************************************
      * Private Functions
      ***********************************************************************/

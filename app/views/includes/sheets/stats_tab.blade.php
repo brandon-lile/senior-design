@@ -23,7 +23,7 @@
                     <div class="ui red label">
                         Proficiency <br> Bonus
                     </div>
-                    {{ Form::number('prof_bonus', $sheet->charactergeneral->proficiency_bonus) }}
+                    {{ Form::number('prof_bonus', $sheet->charactergeneral->proficiency_bonus, array('id' => 'proficiency_bonus')) }}
                 </div>
                 @include('includes.sheets.throws')
                 @include('includes.sheets.treasure')
