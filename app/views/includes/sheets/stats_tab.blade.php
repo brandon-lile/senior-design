@@ -14,7 +14,7 @@
                             {{ Form::label('inspiration') }}
                         </div>
                         <div class="ui mini toggle checkbox">
-                            {{ Form::checkbox('inspiration', 'Inspiration', ($sheet->insp) ? true : false) }}
+                            {{ Form::checkbox('inspiration', ($sheet->insp) ? 1 : 0 , ($sheet->insp) ? true : false) }}
                         </div>
 
                 </div>
@@ -35,6 +35,19 @@
             </div>
         </div>
     </div>
-
-
 </div>
+
+@section('inline-js')
+    <script type="text/javascript">
+        $("input[name=inspiration]").on("change", function()
+        {
+            $.ajax({
+                type: "PATCH",
+                url: "{{ url('character/patchInspiration') }}/{{ $sheet->id }}/" + ((parseInt($("#inspiration").val())) ? 0 : 1),
+                success: function(data){
+                    $(this).val(data);
+                }
+            });
+        });
+    </script>
+@append

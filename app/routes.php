@@ -36,3 +36,4 @@ Route::patch('character/patchability', 'User\CharacterController@patchAbility');
 Route::patch('character/patchClassAttr/{field}', 'User\CharacterController@patchClassAttr');
 Route::patch('character/patchSavingThrow', 'User\CharacterController@patchSavingThrow');
 Route::patch('character/patchSkills', 'User\CharacterController@patchSkills');
+Route::patch('character/patchInspiration/{sheet}/{val}', 'User\CharacterController@patchInspiration');

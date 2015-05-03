@@ -165,6 +165,22 @@ class CharacterController extends \BaseController{
         }
     }
 
+    public function patchInspiration($sheet, $val)
+    {
+        try
+        {
+            $sheet_data = CharacterSheet::where('id', intval($sheet))->firstOrFail();
+            $sheet_data->insp = boolval($val);
+            $sheet_data->save();
+
+            return \Response::json($val);
+        }
+        catch (ModelNotFoundException $e)
+        {
+            $this->app->abort(404);
+        }
+    }
+
     /************************************************************************
      * Private Functions
      ***********************************************************************/
