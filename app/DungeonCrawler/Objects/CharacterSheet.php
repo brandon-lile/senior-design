@@ -16,7 +16,7 @@ class CharacterSheet extends \Eloquent {
 
     public function scopeAll($query)
     {
-        return $query->with('CharacterGeneral', 'CharacterHP', 'SavingThrows', 'Skill', 'Equipment');
+        return $query->with('CharacterGeneral', 'CharacterHP', 'SavingThrows', 'Skill', 'Equipment','Treasure');
     }
 
     /************************************************************************
@@ -57,6 +57,12 @@ class CharacterSheet extends \Eloquent {
     {
         return $this->hasMany('DungeonCrawler\Objects\Equipment', 'sheet_id', 'id');
     }
+
+    public function Treasure()
+    {
+        return $this->hasMany('DungeonCrawler\Objects\Treasure', 'sheet_id', 'id');
+    }
+
 
     /************************************************************************
      * Boot Method

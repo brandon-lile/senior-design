@@ -215,6 +215,39 @@ class CharacterController extends \BaseController{
         }
     }
 
+    public function postTreasure()
+    {
+        try
+        {
+            $sheet = CharacterSheet::where('id', intval($this->request->get('sheet')))->firstOrFail();
+            $treasure = new Treasure();
+            $treasure->name = $this->request->get('treasures');
+
+            $sheet->Treasure()->save($treasure);
+
+            return \Response::json($treasure);
+        }
+        catch (ModelNotFoundException $e)
+        {
+            $this->app->abort(404);
+        }
+    }
+
+    public function deleteTreasure()
+    {
+        try
+        {
+            $treasure = Treasure::where(array('id' => intval($this->request->get('treasure_id')), 'sheet_id' => intval($this->request->get('sheet'))))->firstOrFail();
+            $treasure->delete();
+
+            return \Response::json(true);
+        }
+        catch (ModelNotFoundException $e)
+        {
+            $this->app->abort(404);
+        }
+    }
+
     /************************************************************************
      * Private Functions
      ***********************************************************************/
