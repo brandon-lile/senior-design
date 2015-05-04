@@ -39,3 +39,4 @@ Route::patch('character/patchSkills', 'User\CharacterController@patchSkills');
 Route::patch('character/patchInspiration/{sheet}/{val}', 'User\CharacterController@patchInspiration');
 Route::post('character/postEquipment', 'User\CharacterController@postEquipment');
 Route::delete('character/deleteEquipment', 'User\CharacterController@deleteEquipment');
+Route::patch('character/patchHP', 'User\CharacterController@patchHP');
