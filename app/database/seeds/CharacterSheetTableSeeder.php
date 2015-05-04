@@ -34,7 +34,6 @@ class CharacterSheetTableSeeder extends Seeder {
                     )
                 ),
                 'attack_spell_notes' => "This is the default attack spell notes",
-                'equipment' => "Ain't got nothin",
                 'features' => "No features to be found here"
             )
         );

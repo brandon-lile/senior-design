@@ -7,6 +7,7 @@ use DungeonCrawler\Objects\Helpers\Character;
 use DungeonCrawler\Objects\SavingThrow;
 use DungeonCrawler\Objects\Skill;
 use DungeonCrawler\Objects\Helpers\SkillsHelper;
+use DungeonCrawler\Objects\Equipment;
 
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Application as App;
@@ -174,6 +175,39 @@ class CharacterController extends \BaseController{
             $sheet_data->save();
 
             return \Response::json($val);
+        }
+        catch (ModelNotFoundException $e)
+        {
+            $this->app->abort(404);
+        }
+    }
+
+    public function postEquipment()
+    {
+        try
+        {
+            $sheet = CharacterSheet::where('id', intval($this->request->get('sheet')))->firstOrFail();
+            $equipment = new Equipment();
+            $equipment->name = $this->request->get('equipment');
+
+            $sheet->Equipment()->save($equipment);
+
+            return \Response::json($equipment);
+        }
+        catch (ModelNotFoundException $e)
+        {
+            $this->app->abort(404);
+        }
+    }
+
+    public function deleteEquipment()
+    {
+        try
+        {
+            $equipment = Equipment::where(array('id' => intval($this->request->get('equip_id')), 'sheet_id' => intval($this->request->get('sheet'))))->firstOrFail();
+            $equipment->delete();
+
+            return \Response::json(true);
         }
         catch (ModelNotFoundException $e)
         {
