@@ -34,4 +34,9 @@ class Campaign extends \Eloquent {
     {
         return $this->errors;
     }
+
+    public function DiaryEntry()
+    {
+        return $this->hasMany('DungeonCrawler\Objects\DiaryEntry', 'camp_id', 'id');
+    }
 }

@@ -52,16 +52,16 @@ return array(
 			'prefix'   => '',
 		),
 
-		'mysql' => array(
-			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'forge',
-			'username'  => 'forge',
-			'password'  => '',
-			'charset'   => 'utf8',
-			'collation' => 'utf8_unicode_ci',
-			'prefix'    => '',
-		),
+        'mysql' => array(
+            'driver'    => 'mysql',
+            'host'      => 'localhost',
+            'database'  => 'senior_design',
+            'username'  => 'test',
+            'password'  => 'test',
+            'charset'   => 'utf8',
+            'collation' => 'utf8_general_ci',
+            'prefix'    => '',
+        ),
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',
