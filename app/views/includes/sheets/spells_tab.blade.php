@@ -93,20 +93,27 @@
 
                     // Slots Expended
                     var spells_slots = '<div class="ui right labeled icon input">' +
-                            '<input type="number" class="slot_num_available" id="slots_level_' + level + '" value="' + spells[level]['used'] + '">' +
+                            '<input type="number" class="slot_num_available" id="slots_level_' + level + '" value="**level_used**">' +
                             '<div class="ui tag label" id="total_slots_' + level + '">Total: </div>' +
                             '</div>';
 
                     // Spells
                     var spells_content = '';
-                    for(i = 0; i < spells[level].count; i++) {
-                        spells_content += '<div class="item">' +
-                        '<div class="right floated compact mini red ui button"  onclick="show_desc(this)">Desc</div>' +
-                        '<div class="content">' +
-                        '<div class="header"><div class="ui checkbox"><input type="checkbox" id="spell_' + spells[level][i]['id'] + '"><label>' + spells[level][i]['name'] + '</label></div></div>' +
-                        '<div class="hidden cant_desc">' + spells[level][i]['desc'] + '</div>' +
-                        '</div>' +
-                        '</div>';
+                    if(typeof spells[level] != 'undefined' && spells[level].length() > 0) {
+                        for(i = 0; i < spells[level].count; i++) {
+                            spells_content += '<div class="item">' +
+                            '<div class="right floated compact mini red ui button"  onclick="show_desc(this)">Desc</div>' +
+                            '<div class="content">' +
+                            '<div class="header"><div class="ui checkbox"><input type="checkbox" id="spell_' + spells[level][i]['id'] + '"><label>' + spells[level][i]['name'] + '</label></div></div>' +
+                            '<div class="hidden cant_desc">' + spells[level][i]['desc'] + '</div>' +
+                            '</div>' +
+                            '</div>';
+                        }
+                        spells_slots = spells_slots.replace("**level_used**", spells[level]['used']);
+                    }
+                    else
+                    {
+                        spells_slots = spells_slots.replace("**level_used**", 0);
                     }
 
                     spell_layout = spell_layout.replace("**slots_expended**", spells_slots);

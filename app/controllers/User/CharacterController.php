@@ -106,14 +106,13 @@ class CharacterController extends \BaseController{
             }
 
             // Get the spells
-            $spells = Spell::where('class', $classes)->get();
+            $spells = Spell::whereIn('class', $classes)->get();
 
             // Realign
             $spells = $this->character->realignSpells($spells);
 
             // Realign the spells the user has
             $used_spells = array();
-            $level_count = array();
             foreach($sheet->charspell as $charspell)
             {
                 $spells['spells'][$charspell->spell->level]['used']++;
@@ -185,7 +184,6 @@ class CharacterController extends \BaseController{
 
     public function patchClassAttr($attr)
     {
-        // @todo delete all charspells if class is changed
         $attr_array = array('class', 'race', 'alignment', 'background', 'level', 'xp');
 
         if(in_array($attr, $attr_array))
@@ -195,6 +193,15 @@ class CharacterController extends \BaseController{
                 $sheet = CharacterGeneral::where('sheet_id', intval($this->request->get('sheet')))->firstOrFail();
                 $sheet[$attr] = intval($this->request->get('value'));
                 $sheet->save();
+
+                if($attr == 'class')
+                {
+                    $charSpells = CharSpell::where('sheet_id', intval($this->request->get('sheet')))->get();
+                    foreach($charSpells as $cs)
+                    {
+                        $cs->delete();
+                    }
+                }
 
                 return \Response::json(true);
             }
