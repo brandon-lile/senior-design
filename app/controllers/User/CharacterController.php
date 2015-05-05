@@ -8,8 +8,12 @@ use DungeonCrawler\Objects\SavingThrow;
 use DungeonCrawler\Objects\Skill;
 use DungeonCrawler\Objects\Helpers\SkillsHelper;
 use DungeonCrawler\Objects\Equipment;
+use DungeonCrawler\Objects\Spell;
+use DungeonCrawler\Objects\Helpers\SpellClass;
+use DungeonCrawler\Objects\CharSpell;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector as Redirect;
 use Illuminate\Foundation\Application as App;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -29,7 +33,9 @@ class CharacterController extends \BaseController{
 
     private $skills;
 
-    public function __construct(View $view, CharacterGeneral $characterGeneral, App $app, Request $request, Character $character, SkillsHelper $skillsHelper)
+    private $redirect;
+
+    public function __construct(View $view, CharacterGeneral $characterGeneral, App $app, Request $request, Character $character, SkillsHelper $skillsHelper, Redirect $redirect)
     {
         $this->beforeFilter('auth');
 
@@ -41,6 +47,7 @@ class CharacterController extends \BaseController{
         $this->request = $request;
         $this->character = $character;
         $this->skills = $skillsHelper;
+        $this->redirect = $redirect;
     }
 
     public function getSheet($id = 0)
@@ -52,7 +59,7 @@ class CharacterController extends \BaseController{
         $ability_ids[null] = "None";
 
         // Spell save and spell attack
-        $spell_save = $spell_bonus = 0;
+        $spell_save = 0;
         if ($sheet->charactergeneral->spellclass->ability == null)
         {
             $spell_save = 8 + $sheet->charactergeneral->proficiency_bonus;
@@ -77,6 +84,80 @@ class CharacterController extends \BaseController{
     /************************************************************************
      * Ajax functions
      ***********************************************************************/
+
+    public function getSpells($id = 0)
+    {
+        try
+        {
+            $sheet = CharacterSheet::where('id', $id)->with('CharacterGeneral', 'CharacterGeneral.SpellClass', 'CharSpell', 'CharSpell.Spell')->firstOrFail();
+
+            // Spells (currently grab all of the same class -- no subclass)
+            if (strpos($sheet->charactergeneral->spellclass->class, " ") != false)
+                $base_class = substr($sheet->charactergeneral->spellclass->class, 0, strpos($sheet->charactergeneral->spellclass->class, " "));
+            else
+                $base_class = $sheet->charactergeneral->spellclass->class;
+
+            $spell_class_ids = SpellClass::where('class', 'LIKE', '%' . $base_class . '%')->get();
+
+            $classes = array();
+            foreach ($spell_class_ids as $spell_class)
+            {
+                $classes[] = $spell_class->id;
+            }
+
+            // Get the spells
+            $spells = Spell::where('class', $classes)->get();
+
+            // Realign
+            $spells = $this->character->realignSpells($spells);
+
+            // Realign the spells the user has
+            $used_spells = array();
+            $level_count = array();
+            foreach($sheet->charspell as $charspell)
+            {
+                $spells['spells'][$charspell->spell->level]['used']++;
+                $used_spells[] = $charspell->spell_id;
+            }
+
+            $spells['used'] = $used_spells;
+            return \Response::json($spells);
+        }
+        catch (ModelNotFoundException $e)
+        {
+            $this->app->abort(404);
+        }
+    }
+
+    public function postSpell()
+    {
+        try
+        {
+            $sheet = CharacterSheet::where('id', intval($this->request->get('sheet')))->firstOrFail();
+
+            // Check to see if we have the spell already
+            try
+            {
+                $charSpell = CharSpell::where(array('sheet_id' => intval($this->request->get('sheet')), 'spell_id' => intval($this->request->get('spell'))))->firstOrFail();
+                $charSpell->delete();
+                return \Response::json(false);
+            }
+            catch (ModelNotFoundException $e)
+            {
+                // Don't have it yet
+                $charSpell = new CharSpell();
+                $charSpell->sheet_id = intval($this->request->get('sheet'));
+                $charSpell->spell_id = intval($this->request->get('spell'));
+                $charSpell->save();
+
+                return \Response::json($charSpell);
+            }
+        }
+        catch (ModelNotFoundException $e)
+        {
+            $this->app->abort(404);
+        }
+    }
 
     public function patchAbility()
     {
@@ -104,6 +185,7 @@ class CharacterController extends \BaseController{
 
     public function patchClassAttr($attr)
     {
+        // @todo delete all charspells if class is changed
         $attr_array = array('class', 'race', 'alignment', 'background', 'level', 'xp');
 
         if(in_array($attr, $attr_array))

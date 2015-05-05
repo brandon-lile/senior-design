@@ -58,6 +58,11 @@ class CharacterSheet extends \Eloquent {
         return $this->hasMany('DungeonCrawler\Objects\Equipment', 'sheet_id', 'id');
     }
 
+    public function CharSpell()
+    {
+        return $this->hasMany('DungeonCrawler\Objects\CharSpell', 'sheet_id', 'id');
+    }
+
     /************************************************************************
      * Boot Method
      ***********************************************************************/

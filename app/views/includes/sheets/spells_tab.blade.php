@@ -34,367 +34,165 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="ui sixteen wide column">
-            <div class="ui center aligned divided grid">
-                <div class="equal height row">
-                    <div class="five wide column">
-                        <div class="ui raised red segment">
-                            <h3 class="ui red header">Cantrips</h3>
-                            <div class="ui segment equipment-list">
-                                <div class="ui divided list">
-                                    <div class="item">
-                                        <div class="right floated compact mini red ui button">Desc</div>
-                                        <div class="content">
-                                            <div class="header">Light </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="right floated compact mini red ui button">Desc</div>
-                                        <div class="content">
-                                            <div class="header">Viscious Mockery</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+    <div class="ui segment">
+        <div class="ui active inverted dimmer" id="spells_dimmer">
+            <div class="ui active text loader">Loading Spells</div>
+        </div>
+        <div class="row">
+            <div class="ui sixteen wide column">
+                <div class="ui center aligned divided grid">
+                    <div class="equal height row" id="spells_container">
+                        <div class="five wide column" id="first_column">
+
                         </div>
 
+                        <div class="five wide column" id="second_column">
 
-                        <br><br>
-
-                        <div class="ui raised red segment">
-                            <h3 class="ui red header">Level: 1</h3>
-                            Slots Expended
-                            <div class="ui right labeled left icon input">
-                                {{ Form::number('used', 0) }}
-                                <div class="ui tag label">
-                                    Total: 4
-                                </div>
-                            </div>
-                            <div class="ui segment equipment-list">
-                                <div class="ui divided list">
-                                    <div class="item">
-                                        <div class="right floated compact mini red ui button">Desc</div>
-                                        <div class="content">
-                                            <div class="header">
-                                                <div class="ui checkbox">
-                                                    <input type="checkbox">
-                                                    <label>Detect Magic</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="right floated compact mini red ui button">Desc</div>
-                                        <div class="content">
-                                            <div class="header">
-                                                <div class="ui checkbox">
-                                                    <input type="checkbox">
-                                                    <label>Cure Wounds</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
-                        <br><br>
+                        <div class="five wide column" id="third_column">
 
-                        <div class="ui raised red segment">
-                            <h3 class="ui red header">Level: 2</h3>
-                            Slots Expended
-                            <div class="ui right labeled left icon input">
-                                {{ Form::number('used', 0) }}
-                                <div class="ui tag label">
-                                    Total: 3
-                                </div>
-                            </div>
-                            <div class="ui segment equipment-list">
-                                <div class="ui divided list">
-                                    <div class="item">
-                                        <div class="right floated compact mini red ui button">Desc</div>
-                                        <div class="content">
-                                            <div class="header">
-                                                <div class="ui checkbox">
-                                                    <input type="checkbox">
-                                                    <label>Invisibility</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="right floated compact mini red ui button">Desc</div>
-                                        <div class="content">
-                                            <div class="header">
-                                                <div class="ui checkbox">
-                                                    <input type="checkbox">
-                                                    <label>Dispel Magic</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="five wide column">
-                        <div class="ui raised red segment">
-                            <h3 class="ui red header">Level: 3</h3>
-                            Slots Expended
-                            <div class="ui right labeled left icon input">
-                                {{ Form::number('used', 0) }}
-                                <div class="ui tag label">
-                                    Total: 3
-                                </div>
-                            </div>
-                            <div class="ui segment equipment-list">
-                                <div class="ui divided list">
-                                    <div class="item">
-                                        <div class="right floated compact mini red ui button">Desc</div>
-                                        <div class="content">
-                                            <div class="header">
-                                                <div class="ui checkbox">
-                                                    <input type="checkbox">
-                                                    <label>Bestow Curse</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="right floated compact mini red ui button">Desc</div>
-                                        <div class="content">
-                                            <div class="header">
-                                                <div class="ui checkbox">
-                                                    <input type="checkbox">
-                                                    <label>Fireball</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <br><br>
-
-                        <div class="ui raised red segment">
-                            <h3 class="ui red header">Level: 4</h3>
-                            Slots Expended
-                            <div class="ui right labeled left icon input">
-                                {{ Form::number('used', 0) }}
-                                <div class="ui tag label">
-                                    Total: 3
-                                </div>
-                            </div>
-                            <div class="ui segment equipment-list">
-                                <div class="ui divided list">
-                                    <div class="item">
-                                        <div class="right floated compact mini red ui button">Desc</div>
-                                        <div class="content">
-                                            <div class="header">
-                                                <div class="ui checkbox">
-                                                    <input type="checkbox">
-                                                    <label>Conjure Woodland Being</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="right floated compact mini red ui button">Desc</div>
-                                        <div class="content">
-                                            <div class="header">
-                                                <div class="ui checkbox">
-                                                    <input type="checkbox">
-                                                    <label>Protection from Energy</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <br><br>
-
-                        <div class="ui raised red segment">
-                            <h3 class="ui red header">Level: 5</h3>
-                            Slots Expended
-                            <div class="ui right labeled left icon input">
-                                {{ Form::number('used', 0) }}
-                                <div class="ui tag label">
-                                    Total: 3
-                                </div>
-                            </div>
-                            <div class="ui segment equipment-list">
-                                <div class="ui divided list">
-                                    <div class="item">
-                                        <div class="right floated compact mini red ui button">Desc</div>
-                                        <div class="content">
-                                            <div class="header">
-                                                <div class="ui checkbox">
-                                                    <input type="checkbox">
-                                                    <label>Banishing Smite</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="right floated compact mini red ui button">Desc</div>
-                                        <div class="content">
-                                            <div class="header">
-                                                <div class="ui checkbox">
-                                                    <input type="checkbox">
-                                                    <label>Geas</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="five wide column">
-                        <div class="ui raised red segment">
-                            <h3 class="ui red header">Level: 6</h3>
-                            Slots Expended
-                            <div class="ui right labeled left icon input">
-                                {{ Form::number('used', 0) }}
-                                <div class="ui tag label">
-                                    Total: 2
-                                </div>
-                            </div>
-                            <div class="ui segment equipment-list">
-                                <div class="ui divided list">
-                                    <div class="item">
-                                        <div class="right floated compact mini red ui button">Desc</div>
-                                        <div class="content">
-                                            <div class="header">
-                                                <div class="ui checkbox">
-                                                    <input type="checkbox">
-                                                    <label>True Seeing</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <br><br>
-
-                        <div class="ui raised red segment">
-                            <h3 class="ui red header">Level: 7</h3>
-                            Slots Expended
-                            <div class="ui right labeled left icon input">
-                                {{ Form::number('used', 0) }}
-                                <div class="ui tag label">
-                                    Total: 2
-                                </div>
-                            </div>
-                            <div class="ui segment equipment-list">
-                                <div class="ui divided list">
-                                    <div class="item">
-                                        <div class="right floated compact mini red ui button">Desc</div>
-                                        <div class="content">
-                                            <div class="header">
-                                                <div class="ui checkbox">
-                                                    <input type="checkbox">
-                                                    <label>Mordenkainen's Sword</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <br><br>
-
-                        <div class="ui raised red segment">
-                            <h3 class="ui red header">Level: 8</h3>
-                            Slots Expended
-                            <div class="ui right labeled left icon input">
-                                {{ Form::number('used', 0) }}
-                                <div class="ui tag label">
-                                    Total: 2
-                                </div>
-                            </div>
-                            <div class="ui segment equipment-list">
-                                <div class="ui divided list">
-                                    <div class="item">
-                                        <div class="right floated compact mini red ui button">Desc</div>
-                                        <div class="content">
-                                            <div class="header">
-                                                <div class="ui checkbox">
-                                                    <input type="checkbox">
-                                                    <label>Power Word Stun</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="right floated compact mini red ui button">Desc</div>
-                                        <div class="content">
-                                            <div class="header">
-                                                <div class="ui checkbox">
-                                                    <input type="checkbox">
-                                                    <label>Feeblemind</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <br><br>
-
-                        <div class="ui raised red segment">
-                            <h3 class="ui red header">Level: 9</h3>
-                            Slots Expended
-                            <div class="ui right labeled left icon input">
-                                {{ Form::number('used', 0) }}
-                                <div class="ui tag label">
-                                    Total: 1
-                                </div>
-                            </div>
-                            <div class="ui segment equipment-list">
-                                <div class="ui divided list">
-                                    <div class="item">
-                                        <div class="right floated compact mini red ui button">Desc</div>
-                                        <div class="content">
-                                            <div class="header">
-                                                <div class="ui checkbox">
-                                                    <input type="checkbox">
-                                                    <label>Power Word Heal</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="right floated compact mini red ui button">Desc</div>
-                                        <div class="content">
-                                            <div class="header">
-                                                <div class="ui checkbox">
-                                                    <input type="checkbox">
-                                                    <label>True Polymorph</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@section('inline-js')
+    <script type="text/javascript">
+
+        var updateSpell = function updateSpell()
+        {
+            console.log($(this).val());
+            var spell_id = $(this).attr('id');
+            spell_id = spell_id.substr(spell_id.indexOf("_") + 1);
+            var params = {
+                'spell' : spell_id,
+                'sheet' : "{{ $sheet->id }}"
+            };
+
+            $.ajax({
+                type : "POST",
+                data : params,
+                url : "{{ action('User\CharacterController@postSpell') }}",
+                success : function(data) {
+                    console.log(data);
+                }
+            });
+        };
+
+        $(document).on("ready", function()
+        {
+            var output_spells = function(spells)
+            {
+                for (level = 1; level <= 9; level++) {
+                    var spell_layout = '<div class="ui raised red segment"><h3 class="ui red header">Level: ' + level + '</h3>Slots Expended**slots_expended**<div class="ui segment equipment-list">' +
+                            '<div class="ui divided list">**inner_spell**</div></div></div>';
+
+                    // Slots Expended
+                    var spells_slots = '<div class="ui right labeled icon input">' +
+                            '<input type="number" class="slot_num_available" id="slots_level_' + level + '" value="' + spells[level]['used'] + '">' +
+                            '<div class="ui tag label" id="total_slots_' + level + '">Total: </div>' +
+                            '</div>';
+
+                    // Spells
+                    var spells_content = '';
+                    for(i = 0; i < spells[level].count; i++) {
+                        spells_content += '<div class="item">' +
+                        '<div class="right floated compact mini red ui button"  onclick="show_desc(this)">Desc</div>' +
+                        '<div class="content">' +
+                        '<div class="header"><div class="ui checkbox"><input type="checkbox" id="spell_' + spells[level][i]['id'] + '"><label>' + spells[level][i]['name'] + '</label></div></div>' +
+                        '<div class="hidden cant_desc">' + spells[level][i]['desc'] + '</div>' +
+                        '</div>' +
+                        '</div>';
+                    }
+
+                    spell_layout = spell_layout.replace("**slots_expended**", spells_slots);
+                    spell_layout = spell_layout.replace("**inner_spell**", spells_content);
+
+                    if(level == 1 || level == 2){
+                        $("#first_column").append(spell_layout);
+                    } else if (level > 2 && level < 6) {
+                        $("#second_column").append(spell_layout);
+                    } else {
+                        $("#third_column").append(spell_layout);
+                    }
+                }
+            };
+
+            var output_cantrips = function(cantrips)
+            {
+                var cantrips_layout = '<div class="ui raised red segment"><h3 class="ui red header">Cantrips</h3><div class="ui segment equipment-list">' +
+                        '<div class="ui divided list">**inner_cantrips**</div></div></div>';
+                var inner_cantrips = '';
+                for(i = 0; i < cantrips.count; i++) {
+                    inner_cantrips += '<div class="item">' +
+                    '<div class="right floated compact mini red ui button" onclick="show_desc(this)">Desc</div>' +
+                    '<div class="content">' +
+                    '<div class="header">' + cantrips[i]['name'] + '</div>' +
+                    '<div class="hidden cant_desc">' + cantrips[i]['desc'] + '</div>' +
+                    '</div>' +
+                    '</div>';
+                }
+
+                cantrips_layout = cantrips_layout.replace("**inner_cantrips**", inner_cantrips);
+                $("#first_column").append(cantrips_layout);
+            };
+
+            var activate_spells = function(used)
+            {
+                $.each(used, function(index, value)
+                {
+                    $("#spell_" + value).parent().checkbox('check');
+                });
+
+                $("#spells_container .ui.checkbox").checkbox({
+                    onChange : updateSpell
+                });
+            };
+
+            $("#spells_dimmer").dimmer('show');
+            $.ajax({
+                type : "GET",
+                url : "{{ action('User\CharacterController@getSpells', $sheet->id) }}",
+                success : function(data) {
+
+                    // Start the output
+                    output_cantrips(data.cantrips);
+                    output_spells(data.spells);
+
+                    // Set some options
+                    $(".slots_num_available").disabled = true;
+
+                    // Activate checkboxes
+                    activate_spells(data.used);
+
+                    // Show it to the world
+                    $("#spells_dimmer").dimmer('hide');
+                }
+            });
+        });
+
+
+        function show_desc(btn)
+        {
+            var div = $(btn).parent();
+            if($('.cant_desc', div).hasClass('hidden')) {
+                $('.cant_desc', div.parent()).addClass('hidden');
+                $('.cant_desc', div).removeClass('hidden');
+            } else {
+                $('.cant_desc', div).addClass('hidden');
+            }
+        };
+    </script>
+@append
+
+@section('inline-css')
+    <style type="text/css">
+        .hidden {
+            display: none;
+        }
+    </style>
+@append

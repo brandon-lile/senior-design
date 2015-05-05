@@ -63,4 +63,33 @@ class Character {
     {
         return floor(($value - 10) / 2);
     }
+
+    public function realignSpells($spells)
+    {
+        $final_spells = array();
+        $final_spells['spells'] = array();
+        $final_spells['cantrips'] = array();
+
+        foreach($spells as $spell)
+        {
+            if($spell->level == 0)
+            {
+                $final_spells['cantrips'][] = $spell;
+            }
+            else
+            {
+                $final_spells['spells'][$spell->level][] = $spell;
+            }
+        }
+
+        foreach($final_spells['spells'] as $level => $level_spells)
+        {
+            $final_spells['spells'][$level]['count'] = count($level_spells);
+            $final_spells['spells'][$level]['used'] = 0;
+        }
+
+        $final_spells['cantrips']['count'] = count($final_spells['cantrips']);
+
+        return $final_spells;
+    }
 }

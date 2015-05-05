@@ -13,6 +13,6 @@ class CharSpell extends \Eloquent {
 
     public function Spell()
     {
-         return $this->hasOne('DungeonCrawler\Objects\Spell');
+         return $this->hasOne('DungeonCrawler\Objects\Spell', 'id', 'spell_id');
     }
 }
