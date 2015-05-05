@@ -3,21 +3,15 @@
     <div class="ui form" id="misc">
         <div class="field">
             {{ Form::label('traits', 'Personality Traits') }}
-            {{ Form::textarea('traits') }}
+            {{ Form::textarea('traits', $sheet->charactergeneral->traits) }}
         </div>
         <div class="field">
             {{ Form::label('ideals', 'Ideals') }}
-            {{ Form::textarea('ideals') }}
+            {{ Form::textarea('ideals', $sheet->charactergeneral->ideals) }}
         </div>
         <div class="field">
             {{ Form::label('bonds', 'Bonds') }}
-            {{ Form::textarea('bonds') }}
+            {{ Form::textarea('bonds', $sheet->charactergeneral->bonds) }}
         </div>
     </div>
 </div>
-
-@section('inline-js')
-    <script type="text/javascript">
-
-    </script>
-@append

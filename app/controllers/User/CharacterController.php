@@ -250,7 +250,7 @@ class CharacterController extends \BaseController{
     {
         try
         {
-            $info_attr = array('age', 'height', 'weight', 'eyes', 'skin', 'hair');
+            $info_attr = array('age', 'height', 'weight', 'eyes', 'skin', 'hair', 'backstory', 'traits', 'ideals', 'bonds');
             $sheet = CharacterSheet::where('id', intval($this->request->get('sheet')))->with('CharacterGeneral')->firstOrFail();
 
             if (in_array($this->request->get('field'), $info_attr))
@@ -264,6 +264,22 @@ class CharacterController extends \BaseController{
             {
                 $this->app->abort(500);
             }
+        }
+        catch (ModelNotFoundException $e)
+        {
+            $this->app->abort(404);
+        }
+    }
+
+    public function patchFeatures()
+    {
+        try
+        {
+            $sheet = CharacterSheet::where('id', intval($this->request->get('sheet')))->firstOrFail();
+            $sheet->features = $this->request->get('features');
+            $sheet->save();
+
+            return \Response::json(true);
         }
         catch (ModelNotFoundException $e)
         {

@@ -35,34 +35,7 @@
         <div class="ui form">
             <div class="field">
                 {{ Form::label('backstory', 'Character Backstory') }}
-                {{ Form::textarea('backstory') }}
+                {{ Form::textarea('backstory', $sheet->charactergeneral->backstory, array('id' => 'backstory')) }}
             </div>
         </div>
 </div>
-
-@section('inline-js')
-    <script type="text/javascript">
-
-        var save_info = debounce(function()
-            {
-                var params = {
-                    'field' : $(this).attr('name'),
-                    'value' : $(this).val(),
-                    'sheet' : "{{ $sheet->id }}"
-                };
-
-                console.log(params);
-                $.ajax({
-                    type : "PATCH",
-                    data : params,
-                    url : "{{ action('User\CharacterController@patchInfo') }}",
-                    success : function(data) {
-
-                    }
-                });
-            }, 250);
-            
-        $("#char_info input").on("change", save_info);
-    </script>
-@append
-
