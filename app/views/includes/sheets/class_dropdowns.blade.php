@@ -48,6 +48,8 @@
                 success : function(data){
                     if(params['field'] == 'level') {
                         $("#proficiency_bonus").val(1 + Math.ceil(params['value']/4));
+                    } else if (params['field'] == 'class') {
+                        window.location.replace('{{ action('User\CharacterController@getSheet', $sheet->id)  }}');
                     }
                 }
             });

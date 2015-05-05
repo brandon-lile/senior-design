@@ -99,7 +99,7 @@
 
                     // Spells
                     var spells_content = '';
-                    if(typeof spells[level] != 'undefined' && spells[level].length() > 0) {
+                    if(spells.hasOwnProperty(level)) {
                         for(i = 0; i < spells[level].count; i++) {
                             spells_content += '<div class="item">' +
                             '<div class="right floated compact mini red ui button"  onclick="show_desc(this)">Desc</div>' +
