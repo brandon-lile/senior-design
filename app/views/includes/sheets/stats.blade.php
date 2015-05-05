@@ -4,7 +4,7 @@
             <div class="ui blue label">
                 {{ Form::label(strtolower($data['name']), $data['name']) }}
                 <div class="ui right labeled left icon input">
-                    {{ Form::number(strtolower($data['name']), $data['value'], array('id' => strtolower($data['name']))) }}
+                    {{ Form::number(strtolower($data['name']), $data['value'], array('id' => strtolower($data['name']), 'min' => 0, 'max' => 30)) }}
                     <div class="ui tag label">
                         {{ $data['bonus'] }}
                     </div>

@@ -45,6 +45,22 @@ class SpellsTableSeeder extends CSVSeeder {
             }
         }
 
+        $extra_classes = array(
+            'Rogue', 'Rogue (Thief)', 'Rogue (Assassin)', 'Rogue (Arcane Trickster)',
+            'Fighter', 'Fighter (Champion)', 'Fighter (Battle Master)', 'Fighter (Eldritch Knight)',
+            'Barbarian', 'Barbarian (Berserker)', 'Barbarian (Totem Warrior)',
+            'Monks', 'Monk (Open Hand)', 'Monk (Shadow)', 'Monk (Four Elements)',
+            'Ranger (Hunter)', 'Ranger (Beast Master)'
+        );
+        foreach($extra_classes as $class)
+        {
+            $classes[] = array(
+                'id' => $id,
+                'class' => $class
+            );
+            $id++;
+        }
+
         DB::table('spell_classes')->insert($classes);
 
         // Rename class field and add class id field
