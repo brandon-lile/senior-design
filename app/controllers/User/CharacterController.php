@@ -246,6 +246,31 @@ class CharacterController extends \BaseController{
         }
     }
 
+    public function patchInfo()
+    {
+        try
+        {
+            $info_attr = array('age', 'height', 'weight', 'eyes', 'skin', 'hair');
+            $sheet = CharacterSheet::where('id', intval($this->request->get('sheet')))->with('CharacterGeneral')->firstOrFail();
+
+            if (in_array($this->request->get('field'), $info_attr))
+            {
+                $sheet->charactergeneral[$this->request->get('field')] = $this->request->get('value');
+                $sheet->charactergeneral->save();
+
+                return \Response::json(true);
+            }
+            else
+            {
+                $this->app->abort(500);
+            }
+        }
+        catch (ModelNotFoundException $e)
+        {
+            $this->app->abort(404);
+        }
+    }
+
     /************************************************************************
      * Private Functions
      ***********************************************************************/

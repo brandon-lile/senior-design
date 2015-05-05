@@ -21,7 +21,6 @@
                     <div class="four wide column">
                         @include('includes.sheets.misc')
                     </div>
-
                 </div>
             </div>
         </div>

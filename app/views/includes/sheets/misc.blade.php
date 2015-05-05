@@ -1,5 +1,4 @@
-
-<div class="ui green raised segment">
+<div class="ui green raised segment" id="misc">
     <h2 class="ui header">Misc.</h2>
     <div class="ui form" id="misc">
         <div class="field">
@@ -16,3 +15,9 @@
         </div>
     </div>
 </div>
+
+@section('inline-js')
+    <script type="text/javascript">
+
+    </script>
+@append
