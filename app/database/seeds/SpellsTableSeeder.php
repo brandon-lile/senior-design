@@ -5,6 +5,8 @@ use DungeonCrawler\Objects\Helpers\SpellClass as SpellClass;
 
 class SpellsTableSeeder extends CSVSeeder {
 
+
+
     public function run()
     {
         Eloquent::unguard();
@@ -62,6 +64,31 @@ class SpellsTableSeeder extends CSVSeeder {
         }
 
         DB::table('spell_classes')->insert($classes);
+
+        /*****************************************************
+         * Add ability modifier to spell classes
+         ****************************************************/
+        $class_to_ability = array(
+            'Bard' => 5,
+            'Cleric' => 4,
+            'Druid' => 4,
+            'Paladin' => 5,
+            'Ranger' => 4,
+            'Sorcerer' => 5,
+            'Warlock' => 5,
+            'Wizard' => 3,
+            'Eldritch' => 3,
+            'Arcane' => 3
+        );
+        foreach ($class_to_ability as $class => $ability)
+        {
+            $spell_class = SpellClass::where('class', 'LIKE', '%' . $class . '%')->get();
+            foreach($spell_class as $sc)
+            {
+                $sc->ability = $ability;
+                $sc->save();
+            }
+        }
 
         // Rename class field and add class id field
         $statement = "ALTER TABLE spells CHANGE class class_string varchar(255)";

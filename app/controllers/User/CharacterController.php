@@ -48,6 +48,19 @@ class CharacterController extends \BaseController{
         $sheet = CharacterSheet::where('id', $id)->All()->first();
         $sheet->abilities = $this->character->prettifyAbilities($sheet->abilities, true);
         $sheet->savingthrows->abilities = $this->character->prettifyAbilities($sheet->savingthrows->abilities, false);
+        $ability_ids = $this->character->abilityIdToName();
+        $ability_ids[null] = "None";
+
+        // Spell save and spell attack
+        $spell_save = $spell_bonus = 0;
+        if ($sheet->charactergeneral->spellclass->ability == null)
+        {
+            $spell_save = 8 + $sheet->charactergeneral->proficiency_bonus;
+        }
+        else
+        {
+            $spell_save = 8 + $sheet->charactergeneral->proficiency_bonus + $sheet->abilities[$sheet->charactergeneral->spellclass->ability]['bonus'];
+        }
 
         $this->layout->content = $this->view->make('pages.character.sheet')
                                     ->with('class_dropdown', $this->characterGeneral->classToDropdown())
@@ -56,8 +69,9 @@ class CharacterController extends \BaseController{
                                     ->with('race_dropdown', $this->characterGeneral->raceToDropdown())
                                     ->with('sheet', $sheet)
                                     ->with('skills_output', $this->skills->getSkillsOutputArray())
-                                    ->with('ability_ids', $this->character->abilityIdToName())
-                                    ->with('skills_choices', $this->skills->getSkillsChoiceDropdown());
+                                    ->with('ability_ids', $ability_ids)
+                                    ->with('skills_choices', $this->skills->getSkillsChoiceDropdown())
+                                    ->with('spell_save', $spell_save);
     }
 
     /************************************************************************

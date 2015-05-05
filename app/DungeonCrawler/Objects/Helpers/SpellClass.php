@@ -9,4 +9,9 @@ class SpellClass extends \Eloquent {
 
     public $timestamps = false;
 
+    public function CharacterGeneral()
+    {
+        return $this->belongsTo('DungeonCrawler\Objects\CharacterGeneral', 'id', 'class');
+    }
+
 }

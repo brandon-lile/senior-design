@@ -11,19 +11,19 @@
                                 <div class="fields">
                                     <div class="four wide field">
                                         {{ Form::label('spell_class', 'Spell Casting Class') }}
-                                        {{ Form::text('spell_class') }}
+                                        {{ Form::select('spell_class', $class_dropdown, $sheet->class, array('id' => 'spell_class', 'class' => 'ui dropdown')) }}
                                     </div>
                                     <div class="four wide field">
                                         {{ Form::label('spell_ability', 'Spell Casting Ability') }}
-                                        {{ Form::text('spell_ability') }}
+                                        {{ Form::text('spell_ability', $ability_ids[$sheet->charactergeneral->spellclass->ability], array('disabled')) }}
                                     </div>
                                     <div class="four wide field">
                                         {{ Form::label('spell_save', 'Spell Save DC') }}
-                                        {{ Form::text('spell_save',8) }}
+                                        {{ Form::text('spell_save', $spell_save, array('disabled')) }}
                                     </div>
                                     <div class="four wide field">
                                         {{ Form::label('spell_bonus', 'Spell Attack Bonus') }}
-                                        {{ Form::number('spell_bonus',8) }}
+                                        {{ Form::number('spell_bonus', $spell_save - 8, array('disabled')) }}
                                     </div>
                                 </div>
                             </div>

@@ -17,6 +17,11 @@ class CharacterGeneral extends \Eloquent {
         return $this->belongsTo('DungeonCrawler\Objects\CharacterSheet', 'sheet_id', 'id');
     }
 
+    public function SpellClass()
+    {
+        return $this->hasOne('DungeonCrawler\Objects\Helpers\SpellClass', 'id', 'class');
+    }
+
     /*************************************************************************
      * Accessor & Mutators
      ************************************************************************/

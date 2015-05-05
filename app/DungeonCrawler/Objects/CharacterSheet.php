@@ -16,7 +16,7 @@ class CharacterSheet extends \Eloquent {
 
     public function scopeAll($query)
     {
-        return $query->with('CharacterGeneral', 'CharacterHP', 'SavingThrows', 'Skill', 'Equipment');
+        return $query->with('CharacterGeneral', 'CharacterHP', 'SavingThrows', 'Skill', 'Equipment', 'CharacterGeneral.SpellClass');
     }
 
     /************************************************************************
