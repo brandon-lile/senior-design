@@ -215,6 +215,62 @@ class CharacterController extends \BaseController{
         }
     }
 
+    public function patchHP()
+    {
+        $sheet_attr = array('armor_class', 'initiative', 'speed');
+        $hp_attr = array('current', 'max');
+        try
+        {
+            $sheet = CharacterSheet::where('id', intval($this->request->get('sheet')))->with('CharacterHP')->firstOrFail();
+
+            if (in_array($this->request->get('field'), $sheet_attr))
+            {
+                $sheet[$this->request->get('field')] = $this->request->get('value');
+                $sheet->save();
+            }
+            elseif (in_array($this->request->get('field'), $hp_attr))
+            {
+                $sheet->characterhp[$this->request->get('field')] = intval($this->request->get('value'));
+                $sheet->characterhp->save();
+            }
+            else
+            {
+                $this->app->abort(500);
+            }
+
+            return \Response::json(true);
+        }
+        catch (ModelNotFoundException $e)
+        {
+            $this->app->abort(404);
+        }
+    }
+
+    public function patchInfo()
+    {
+        try
+        {
+            $info_attr = array('age', 'height', 'weight', 'eyes', 'skin', 'hair');
+            $sheet = CharacterSheet::where('id', intval($this->request->get('sheet')))->with('CharacterGeneral')->firstOrFail();
+
+            if (in_array($this->request->get('field'), $info_attr))
+            {
+                $sheet->charactergeneral[$this->request->get('field')] = $this->request->get('value');
+                $sheet->charactergeneral->save();
+
+                return \Response::json(true);
+            }
+            else
+            {
+                $this->app->abort(500);
+            }
+        }
+        catch (ModelNotFoundException $e)
+        {
+            $this->app->abort(404);
+        }
+    }
+
     /************************************************************************
      * Private Functions
      ***********************************************************************/
