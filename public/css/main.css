@@ -19,3 +19,8 @@
 #misc textarea {
     max-height:50px;
 }
+.avatar-image {
+    height: 120px;
+    width: 120px;
+    margin-bottom: 10px;
+}

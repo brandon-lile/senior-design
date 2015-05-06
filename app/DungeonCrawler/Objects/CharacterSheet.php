@@ -116,4 +116,16 @@ class CharacterSheet extends \Eloquent {
     {
         $this->attributes['abilities'] = serialize($prof);
     }
+
+    public function getCharPicAttribute($pic)
+    {
+        if($pic == null)
+        {
+            return asset('images/avatar/stock.png');
+        }
+        else
+        {
+            return asset('images/uploads/' . $pic . "." . $this->attributes['char_pic_ext']);
+        }
+    }
 }

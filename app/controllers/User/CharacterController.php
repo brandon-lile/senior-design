@@ -1,5 +1,6 @@
 <?php namespace User;
 
+use Carbon\Carbon;
 use Illuminate\View\Factory as View;
 use DungeonCrawler\Objects\CharacterGeneral;
 use DungeonCrawler\Objects\CharacterSheet;
@@ -79,6 +80,42 @@ class CharacterController extends \BaseController{
                                     ->with('ability_ids', $ability_ids)
                                     ->with('skills_choices', $this->skills->getSkillsChoiceDropdown())
                                     ->with('spell_save', $spell_save);
+    }
+
+    public function postAvatar()
+    {
+        try
+        {
+            $sheet = CharacterSheet::where('id', intval($this->request->get('sheet_id')))->firstOrFail();
+
+            $photo = $this->request->file('avatar');
+
+            if($photo === null)
+            {
+                $this->app->abort(200);
+            }
+            else
+            {
+                $random = md5(Carbon::now()) . str_random(16);
+                $extension = $photo->getClientOriginalExtension();
+
+                $photo->move(public_path('images/uploads'), $random . "." . $extension);
+                $sheet->char_pic = $random;
+                $sheet->char_pic_ext = $extension;
+                $sheet->save();
+
+                return $this->redirect->to('character/' . $sheet->id);
+            }
+        }
+        catch (ModelNotFoundException $e)
+        {
+            $this->app->abort(404);
+        }
+    }
+
+    public function deleteAvatar()
+    {
+
     }
 
     /************************************************************************

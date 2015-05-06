@@ -6,15 +6,14 @@
     <div class="ui divided equal height row">
         <div class="four wide column">
             <div class="ui segment">
-                @if ($sheet->char_pic != null)
-                    <img src="{{ asset('images/dnd_character.jpg') }}" class="ui centered rounded image">
+                <img src="{{ $sheet->char_pic }}" class="ui centered rounded image avatar-image">
+                @if ($sheet->char_pic != asset('images/avatar/stock.png'))
                     <div class="ui mini buttons pic-ops">
                         <div class="ui blue button" id="">Edit</div>
                         <div class="or"></div>
-                        <div class="ui red button">Delete</div>
+                        <a class="ui red button" href="{{ action('User\CharacterController@deleteAvatar', $sheet->id) }}">Delete</a>
                     </div>
                 @else
-                    <div class="ui blue message">If you're cool you would upload an avatar</div>
                     <button class="ui blue button" id="add_avatar">Add avatar</button>
                 @endif
             </div>
@@ -45,6 +44,10 @@
     <script type="text/javascript">
         $(document).ready(function(){
             $('.tabular.menu .item').tab({history:false});
+            $("#add_avatar").on("click", function()
+            {
+                $("#add_avatar_modal").modal('show');
+            });
         });
     </script>
 @append
