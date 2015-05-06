@@ -45,3 +45,7 @@
 #treasure_qty {
     width: 100px;
 }
+.slick-slider {
+    background-color:lightgray;
+    padding-top: 10px;
+}

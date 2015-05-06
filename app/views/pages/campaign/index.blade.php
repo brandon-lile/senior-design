@@ -69,15 +69,30 @@
     <div class="ui hidden divider"></div>
     <div class="eight wide column">
         <div class="ui raised blue segment">
-            <h2 class="ui header">Players</h2>
+            <h2 class="ui header">Players <button class="ui blue right floated button" id="add_npc">Invite Player</button></h2>
             <div class="ui divider"></div>
             <div class="slick-slider">
                 @forelse ($campaign->charactersheet as $sheet)
                     <div>
                         <img src="{{ $sheet->char_pic }}" class="ui centered rounded image avatar-image">
                     </div>
+                    <div>
+                        <img src="{{ $sheet->char_pic }}" class="ui centered rounded image avatar-image">
+                    </div>
+                    <div>
+                        <img src="{{ $sheet->char_pic }}" class="ui centered rounded image avatar-image">
+                    </div>
+                    <div>
+                        <img src="{{ $sheet->char_pic }}" class="ui centered rounded image avatar-image">
+                    </div>
+                    <div>
+                        <img src="{{ $sheet->char_pic }}" class="ui centered rounded image avatar-image">
+                    </div>
+                    <div>
+                        <img src="{{ $sheet->char_pic }}" class="ui centered rounded image avatar-image">
+                    </div>
                 @empty
-                    <div class="ui blue message">There are no players in this campaign. Invite them to get your campaign going!</div>
+                    <div class="ui blue message">There are no players in this campaign. Go make some friends!</div>
                 @endforelse
             </div>
         </div>
@@ -129,7 +144,13 @@
         $(document).on("ready", function()
         {
             @if(count($campaign->charactersheet) > 0)
-                $(".slick-slider").slick();
+                $(".slick-slider").slick({
+                    slidesToShow : 3,
+                    slidesToScroll : 1,
+                    autoplay : true,
+                    autoplayspeed : 1500,
+                    infinite: true
+                });
             @endif
 
             $("#camp_desc").on("change", save_desc);
