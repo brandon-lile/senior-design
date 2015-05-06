@@ -51,6 +51,6 @@ Route::patch('character/patchFeatures', 'User\CharacterController@patchFeatures'
 Route::get('character/spells/{id}', 'User\CharacterController@getSpells');
 Route::post('character/spells', 'User\CharacterController@postSpell');
 Route::post('character/avatar', 'User\CharacterController@postAvatar');
-Route::delete('character/avatar', 'User\CharacterController@deleteAvatar');
+Route::get('character/avatar/{id}', 'User\CharacterController@deleteAvatar');
 Route::post('character/treasure', 'User\CharacterController@postTreasure');
 Route::delete('character/treasure', 'User\CharacterController@deleteTreasure');

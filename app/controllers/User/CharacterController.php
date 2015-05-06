@@ -12,6 +12,7 @@ use DungeonCrawler\Objects\Equipment;
 use DungeonCrawler\Objects\Spell;
 use DungeonCrawler\Objects\Helpers\SpellClass;
 use DungeonCrawler\Objects\CharSpell;
+use DungeonCrawler\Objects\Treasure;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector as Redirect;
@@ -114,9 +115,21 @@ class CharacterController extends \BaseController{
         }
     }
 
-    public function deleteAvatar()
+    public function deleteAvatar($id = 0)
     {
+        try
+        {
+            $sheet = CharacterSheet::where('id', intval($id))->firstOrFail();
+            $sheet->char_pic = null;
+            $sheet->char_pic_ext = null;
+            $sheet->save();
 
+            return $this->redirect->to('character/' . $sheet->id);
+        }
+        catch (ModelNotFoundException $e)
+        {
+            $this->app->abort(404);
+        }
     }
 
     /************************************************************************
@@ -432,12 +445,37 @@ class CharacterController extends \BaseController{
 
     public function postTreasure()
     {
+        try
+        {
+            $sheet = CharacterSheet::where('id', intval($this->request->get('sheet')))->firstOrFail();
 
+            $treasure = new Treasure();
+            $treasure->name = $this->request->get('name');
+            $treasure->description = $this->request->get('desc');
+            $treasure->quantity = $this->request->get('qty');
+            $sheet->Treasure()->save($treasure);
+
+            return \Response::json($treasure);
+        }
+        catch (ModelNotFoundException $e)
+        {
+            $this->app->abort(404);
+        }
     }
 
     public function deleteTreasure()
     {
+        try
+        {
+            $treasure = Treasure::where(array('id' => $this->request->get('treasure'), 'sheet_id' => intval($this->request->get('sheet'))))->firstOrFail();
+            $treasure->delete();
 
+            return \Response::json(true);
+        }
+        catch (ModelNotFoundException $e)
+        {
+            $this->app->abort(404);
+        }
     }
     /************************************************************************
      * Private Functions

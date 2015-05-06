@@ -26,9 +26,9 @@
 
 @section('inline-js')
     <script type="text/javascript">
+        var num_equipment = "{{ $sheet->equipment->count() }}";
         $("#equipment_add").on('click', function()
         {
-            var num_equipment = "{{ $sheet->equipment->count() }}";
             var params = {
                 'sheet' : "{{ $sheet->id }}",
                 'equipment' : $("input[name=equipment]").val()
@@ -42,15 +42,16 @@
                     if(parseInt(num_equipment) == 0) {
                         $("#equipment_list").html(
                                 "<div class=\"item\">" +
-                                    "<div class=\"right floated compact mini red ui button\" id=\"equipment_" + data.id + "\">Delete</div>" +
+                                    "<div class=\"right floated compact mini red ui button delete\" id=\"equipment_" + data.id + "\">Delete</div>" +
                                     "<div class=\"content\">" +
                                         "<div class=\"header\">" + data.name + "</div>" +
                                     "</div>" +
                                 "</div>");
+                        num_equipment++;
                     } else {
                         $("#equipment_list").append(
                                 "<div class=\"item\">" +
-                                    "<div class=\"right floated compact mini red ui button\" id=\"equipment_" + data.id + "\">Delete</div>" +
+                                    "<div class=\"right floated compact mini red ui button delete\" id=\"equipment_" + data.id + "\">Delete</div>" +
                                     "<div class=\"content\">" +
                                         "<div class=\"header\">" + data.name + "</div>" +
                                     "</div>" +
@@ -62,7 +63,7 @@
             });
         });
 
-        $("#equipment_list .delete").on("click", function()
+        $("#equipment_list").on("click", ".delete", function()
         {
             var equip_id = $(this).attr("id");
             equip_id = equip_id.substr(equip_id.indexOf("_") + 1);
@@ -76,7 +77,11 @@
                 data : params,
                 url : "{{ action('User\CharacterController@deleteEquipment') }}",
                 success : function(data) {
+                    num_equipment--;
                     $("#equipment_" + equip_id).parent().remove();
+                    if(num_equipment == 0) {
+                        $("#equipment_list").html('<div class="ui blue message">You currently do not have any equipment.</div>');
+                    }
                 }
             });
         });

@@ -13,7 +13,7 @@
                         <div class="ui red label">
                             {{ Form::label('inspiration') }}
                         </div>
-                        <div class="ui mini toggle checkbox">
+                        <div class="ui mini toggle checkbox insp-checkbox">
                             {{ Form::checkbox('inspiration', ($sheet->insp) ? 1 : 0 , ($sheet->insp) ? true : false) }}
                         </div>
 

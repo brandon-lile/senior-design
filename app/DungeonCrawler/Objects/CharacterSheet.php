@@ -16,7 +16,7 @@ class CharacterSheet extends \Eloquent {
 
     public function scopeAll($query)
     {
-        return $query->with('CharacterGeneral', 'CharacterHP', 'SavingThrows', 'Skill', 'Equipment', 'CharacterGeneral.SpellClass');
+        return $query->with('CharacterGeneral', 'CharacterHP', 'SavingThrows', 'Skill', 'Equipment', 'CharacterGeneral.SpellClass', 'Treasure');
     }
 
     /************************************************************************
@@ -61,6 +61,11 @@ class CharacterSheet extends \Eloquent {
     public function CharSpell()
     {
         return $this->hasMany('DungeonCrawler\Objects\CharSpell', 'sheet_id', 'id');
+    }
+
+    public function Treasure()
+    {
+        return $this->hasMany('DungeonCrawler\Objects\Treasure', 'sheet_id', 'id');
     }
 
     /************************************************************************
