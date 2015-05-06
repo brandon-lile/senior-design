@@ -53,6 +53,7 @@ class CharacterController extends \BaseController{
 
     public function getSheet($id = 0)
     {
+        // @todo - Add link to campaign page
         $sheet = CharacterSheet::where('id', $id)->All()->first();
         $sheet->abilities = $this->character->prettifyAbilities($sheet->abilities, true);
         $sheet->savingthrows->abilities = $this->character->prettifyAbilities($sheet->savingthrows->abilities, false);
@@ -429,6 +430,15 @@ class CharacterController extends \BaseController{
         }
     }
 
+    public function postTreasure()
+    {
+
+    }
+
+    public function deleteTreasure()
+    {
+
+    }
     /************************************************************************
      * Private Functions
      ***********************************************************************/

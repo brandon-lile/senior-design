@@ -7,7 +7,7 @@
                     @if (isset($campaigns) && count($campaigns) > 0)
                         <div class="ui divided list selection item-container">
                             @foreach ($campaigns as $campaign)
-                                <a class="item">
+                                <a class="item" href="{{ url('campaign/' . $campaign->id) }}">
                                     <div class="content">
                                         {{ $campaign->campaign_name }}
                                     </div>

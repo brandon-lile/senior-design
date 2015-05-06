@@ -10,4 +10,16 @@ class NPC extends \Eloquent {
     {
         return $this->belongsTo('DungeonCrawler\Objects\Campaign', 'camp_id', 'id');
     }
+
+    public function getNpcPicAttribute($pic)
+    {
+        if($pic != null)
+        {
+            return asset('images/uploads/' . $pic . "." . $this->attributes['npc_pic_ext']);
+        }
+        else
+        {
+            return asset('images/avatar/stock.png');
+        }
+    }
 }

@@ -27,7 +27,13 @@ Route::post('settings/changeusername', 'User\SettingsController@postChangeUserna
 Route::post('settings/changepassword', 'User\SettingsController@postChangePassword');
 
 Route::controller('dashboard', 'User\DashboardController');
-Route::controller('campaign', 'User\CampaignController');
+
+// Campaign
+Route::get('campaign/{id}', 'User\CampaignController@getIndex');
+Route::patch('campaign/description', 'User\CampaignController@patchDescription');
+Route::post('campaign/entry', 'User\CampaignController@postEntry');
+Route::post('campaign/npc', 'User\CampaignController@postNpc');
+Route::post('campaign/picture', 'User\CampaignController@postPicture');
 
 // Character Sheet
 Route::get('character/{id}', 'User\CharacterController@getSheet');
@@ -46,3 +52,5 @@ Route::get('character/spells/{id}', 'User\CharacterController@getSpells');
 Route::post('character/spells', 'User\CharacterController@postSpell');
 Route::post('character/avatar', 'User\CharacterController@postAvatar');
 Route::delete('character/avatar', 'User\CharacterController@deleteAvatar');
+Route::post('character/treasure', 'User\CharacterController@postTreasure');
+Route::delete('character/treasure', 'User\CharacterController@deleteTreasure');

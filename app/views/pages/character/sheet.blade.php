@@ -9,7 +9,7 @@
                 <img src="{{ $sheet->char_pic }}" class="ui centered rounded image avatar-image">
                 @if ($sheet->char_pic != asset('images/avatar/stock.png'))
                     <div class="ui mini buttons pic-ops">
-                        <div class="ui blue button" id="">Edit</div>
+                        <div class="ui blue button" id="edit_avatar">Edit</div>
                         <div class="or"></div>
                         <a class="ui red button" href="{{ action('User\CharacterController@deleteAvatar', $sheet->id) }}">Delete</a>
                     </div>
@@ -45,6 +45,10 @@
         $(document).ready(function(){
             $('.tabular.menu .item').tab({history:false});
             $("#add_avatar").on("click", function()
+            {
+                $("#add_avatar_modal").modal('show');
+            });
+            $("#edit_avatar").on("click", function()
             {
                 $("#add_avatar_modal").modal('show');
             });

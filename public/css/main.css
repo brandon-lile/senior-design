@@ -24,3 +24,17 @@
     width: 120px;
     margin-bottom: 10px;
 }
+.camp_desc {
+    width: 100%;
+}
+.camp_diary {
+    max-height: 200px;
+    overflow-y: scroll;
+}
+.diary_entry {
+    max-height: 70px !important;
+}
+.npc-container {
+    max-height: 500px;
+    overflow-y: scroll;
+}

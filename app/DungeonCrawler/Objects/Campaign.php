@@ -16,6 +16,11 @@ class Campaign extends \Eloquent {
 
     protected $errors;
 
+    public function scopeAll($query)
+    {
+        return $query->with('CharacterSheet', 'DiaryEntry', 'NPC', 'CampaignPicture');
+    }
+
     public function isValid($create = false)
     {
         $validation = Validator::make($this->attributes, ($create ? static::$rules_create : false));
@@ -38,5 +43,20 @@ class Campaign extends \Eloquent {
     public function DiaryEntry()
     {
         return $this->hasMany('DungeonCrawler\Objects\DiaryEntry', 'camp_id', 'id');
+    }
+
+    public function CharacterSheet()
+    {
+        return $this->hasManyThrough('DungeonCrawler\Objects\CharacterSheet', 'DungeonCrawler\Objects\CampaignCharacter', 'sheet_id', 'id');
+    }
+
+    public function NPC()
+    {
+        return $this->hasMany('DungeonCrawler\Objects\Npc', 'camp_id', 'id');
+    }
+
+    public function CampaignPicture()
+    {
+        return $this->hasMany('DungeonCrawler\Objects\CampaignPicture', 'camp_id', 'id');
     }
 }
