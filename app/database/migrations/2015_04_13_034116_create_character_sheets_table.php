@@ -16,7 +16,7 @@ class CreateCharacterSheetsTable extends Migration {
         {
             $table->increments('id');
             $table->integer('user_id');
-            $table->string('char_pic', 40)->nullable()->default(null);
+            $table->string('char_pic', 100)->nullable()->default(null);
             $table->text('abilities');
             $table->tinyInteger('insp');
             $table->tinyInteger('armor_class');
