@@ -11,18 +11,20 @@ class DatabaseSeeder extends Seeder {
     {
         Eloquent::unguard();
 
-        $this->call('UserTableSeeder');
-        $this->call('TraitsTableSeeder');
-        $this->call('AttackSpellTableSeeder');
-        $this->call('CharacterSheetTableSeeder');
-        $this->call('CharSpellTableSeeder');
-        $this->call('CharacterGeneralTableSeeder');
-        $this->call('TreasureTableSeeder');
-        $this->call('BackstoryTableSeeder');
+        if(App::environment() != "production"){
+            $this->call('UserTableSeeder');
+            $this->call('TraitsTableSeeder');
+            $this->call('AttackSpellTableSeeder');
+            $this->call('CharacterSheetTableSeeder');
+            $this->call('CharSpellTableSeeder');
+            $this->call('CharacterGeneralTableSeeder');
+            $this->call('TreasureTableSeeder');
+            $this->call('BackstoryTableSeeder');
+            $this->call('CampaignTableSeeder');
+            $this->call('CampaignCharacterTableSeeder');
+            $this->call('DiaryEntryTableSeeder');
+        }
         $this->call('SpellsTableSeeder');
-        $this->call('CampaignTableSeeder');
-        $this->call('CampaignCharacterTableSeeder');
-        $this->call('DiaryEntryTableSeeder');
     }
 
 }
