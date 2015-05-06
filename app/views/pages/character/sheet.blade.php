@@ -6,12 +6,17 @@
     <div class="ui divided equal height row">
         <div class="four wide column">
             <div class="ui segment">
-                <img src="{{ asset('images/dnd_character.jpg') }}" class="ui centered rounded image">
-                <div class="ui mini buttons pic-ops">
-                    <div class="ui blue button">Edit</div>
-                    <div class="or"></div>
-                    <div class="ui red button">Delete</div>
-                </div>
+                @if ($sheet->char_pic != null)
+                    <img src="{{ asset('images/dnd_character.jpg') }}" class="ui centered rounded image">
+                    <div class="ui mini buttons pic-ops">
+                        <div class="ui blue button" id="">Edit</div>
+                        <div class="or"></div>
+                        <div class="ui red button">Delete</div>
+                    </div>
+                @else
+                    <div class="ui blue message">If you're cool you would upload an avatar</div>
+                    <button class="ui blue button" id="add_avatar">Add avatar</button>
+                @endif
             </div>
         </div>
         <div class="twelve wide column">
@@ -31,6 +36,8 @@
     @include('includes.sheets.stats_tab')
     @include('includes.sheets.information_tab')
     @include('includes.sheets.spells_tab')
+
+    @include('includes.modals.character.avatar')
 
 @stop
 

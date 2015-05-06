@@ -113,10 +113,12 @@ class CharacterController extends \BaseController{
 
             // Realign the spells the user has
             $used_spells = array();
-            foreach($sheet->charspell as $charspell)
+            foreach($sheet->CharSpell as $charspell)
             {
-                $spells['spells'][$charspell->spell->level]['used']++;
-                $used_spells[] = $charspell->spell_id;
+                if($charspell->spell->level != 0){
+                    $spells['spells'][$charspell->spell->level]['used']++;
+                    $used_spells[] = $charspell->spell_id;
+                }
             }
 
             $spells['used'] = $used_spells;

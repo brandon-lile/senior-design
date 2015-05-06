@@ -11,7 +11,7 @@
                                 <div class="fields">
                                     <div class="four wide field">
                                         {{ Form::label('spell_class', 'Spell Casting Class') }}
-                                        {{ Form::select('spell_class', $class_dropdown, $sheet->class, array('id' => 'spell_class', 'class' => 'ui dropdown')) }}
+                                        {{ Form::text('spell_class', $class_dropdown[$sheet->charactergeneral->class], array('disabled'))}}
                                     </div>
                                     <div class="four wide field">
                                         {{ Form::label('spell_ability', 'Spell Casting Ability') }}
