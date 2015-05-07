@@ -72,9 +72,9 @@
             <h2 class="ui header">Players <button class="ui blue right floated button" id="add_player">Invite Player</button></h2>
             <div class="ui divider"></div>
             <div class="slick-slider">
-                @forelse ($campaign->charactersheet as $sheet)
+                @forelse ($campaign->campaigncharacter as $sheet)
                     <div>
-                        <img src="{{ $sheet->char_pic }}" class="ui centered rounded image avatar-image">
+                        <img src="{{ $sheet->charactersheet->char_pic }}" class="ui centered rounded image avatar-image">
                     </div>
                 @empty
                     <div class="ui blue message">There are no players in this campaign. Go make some friends!</div>

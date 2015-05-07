@@ -12,6 +12,6 @@ class CampaignCharacter extends \Eloquent{
     }
     public function CharacterSheet()
     {
-        return $this->hasOne('DungeonCrawler\Objects\CharacterSheet', 'sheet_id', 'id');
+        return $this->hasOne('DungeonCrawler\Objects\CharacterSheet', 'id', 'sheet_id');
     }
 }
