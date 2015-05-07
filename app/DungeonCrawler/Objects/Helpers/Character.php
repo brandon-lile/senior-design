@@ -92,4 +92,38 @@ class Character {
 
         return $final_spells;
     }
+
+    public function pendingToDropdown($pending)
+    {
+        if ($pending->count() > 0)
+        {
+            $return_invites = array();
+            foreach($pending as $invite)
+            {
+                $return_invites[$invite->id] = $invite->campaign->campaign_name;
+            }
+            return $return_invites;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function sheetsToDropdown($sheets)
+    {
+        if ($sheets->charactersheets->count() > 0)
+        {
+            $return_sheets = array();
+            foreach($sheets->charactersheets as $sheet)
+            {
+                $return_sheets[$sheet->id] = $sheet->charactergeneral->char_name;
+            }
+            return $return_sheets;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

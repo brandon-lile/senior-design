@@ -1,5 +1,5 @@
 @section('content')
-    <div class="ui grid">
+    <div class="ui stackable grid">
         <div class="two column row">
             <div class="column">
                 <div class="ui blue segment">
@@ -41,6 +41,11 @@
                     <div class="ui divider"></div>
                     <button class="ui green button" id="add_character">Create Character Sheet</button>
                 </div>
+            </div>
+        </div>
+        <div class="two column row">
+            <div class="column">
+                @include('includes.dashboard.pending')
             </div>
         </div>
     </div>

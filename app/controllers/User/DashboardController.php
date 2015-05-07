@@ -1,10 +1,14 @@
 <?php namespace User;
 
+use DungeonCrawler\Objects\CampaignCharacter;
 use DungeonCrawler\User as User;
 use DungeonCrawler\Objects\Campaign as Campaign;
 use DungeonCrawler\Objects\CharacterGeneral as CharacterGeneral;
 use DungeonCrawler\Objects\CharacterSheet;
+use DungeonCrawler\Objects\PendingPlayer;
+use DungeonCrawler\Objects\Helpers\Character;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\View\Factory as View;
 use Illuminate\Http\Request as Request;
 use Illuminate\Routing\Redirector as Redirect;
@@ -21,7 +25,7 @@ class DashboardController extends \BaseController {
 
     private $characterGeneral;
 
-    public function __construct(View $view, Request $request, Redirect $redirect, CharacterGeneral $characterGeneral)
+    public function __construct(View $view, Request $request, Redirect $redirect, CharacterGeneral $characterGeneral, Character $character)
     {
         $this->beforeFilter('auth');
 
@@ -31,6 +35,8 @@ class DashboardController extends \BaseController {
         $this->request = $request;
         $this->redirect = $redirect;
         $this->characterGeneral = $characterGeneral;
+        $this->character = $character;
+        $this->user = \Auth::user();
     }
 
     public function getIndex()
@@ -39,13 +45,19 @@ class DashboardController extends \BaseController {
             ->with('CharacterSheets', 'CharacterSheets.CharacterGeneral', 'CampaignCharacters', 'CampaignCharacters.Campaign', 'OwnedCampaigns')
             ->firstOrFail();
 
+        $pending_invites = PendingPlayer::where(array('user_id' => $this->user->id, 'accepted' => 0))->with('Campaign')->get();
+        $pending_invites = $this->character->pendingToDropdown($pending_invites);
+        $sheets_dropdown = $this->character->sheetsToDropdown($sheets);
+
         $this->layout->content = $this->view->make('pages.dashboard.index')
                                     ->with('sheets', $sheets->characterSheets)
                                     ->with('campaigns', $sheets->ownedCampaigns)
                                     ->with('race_dropdown', $this->characterGeneral->raceToDropdown())
                                     ->with('alignment_dropdown', $this->characterGeneral->alignmentToDropdown())
                                     ->with('background_dropdown', $this->characterGeneral->backgroundToDropdown())
-                                    ->with('class_dropdown', $this->characterGeneral->classToDropdown());
+                                    ->with('class_dropdown', $this->characterGeneral->classToDropdown())
+                                    ->with('pending', $pending_invites)
+                                    ->with('sheets_dropdown', $sheets_dropdown);
     }
 
     public function postCreateCampaign()
@@ -92,4 +104,26 @@ class DashboardController extends \BaseController {
         }
     }
 
+    public function postAcceptInvite()
+    {
+        try
+        {
+            $invite = PendingPlayer::where(array('user_id' => $this->user->id, 'campaign_id' => intval($this->request->get('campaign'))))->firstOrFail();
+            $sheet = CharacterSheet::where(array('id' => intval($this->request->get('character')), 'user_id' => $this->user->id))->firstOrFail();
+
+            $camp_char = new CampaignCharacter();
+            $camp_char->camp_id = intval($this->request->get('campaign'));
+            $camp_char->sheet_id = $sheet->id;
+            $camp_char->save();
+
+            $invite->accepted = intval(1);
+            $invite->save();
+
+            return $this->redirect->to('dashboard');
+        }
+        catch (ModelNotFoundException $e)
+        {
+            return $this->redirect->to('dashboard');
+        }
+    }
 }

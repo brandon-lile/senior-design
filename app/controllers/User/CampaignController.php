@@ -4,6 +4,8 @@ use Carbon\Carbon;
 use DungeonCrawler\Objects\Campaign;
 use DungeonCrawler\Objects\DiaryEntry;
 use DungeonCrawler\Objects\Npc;
+use DungeonCrawler\User as User;
+use DungeonCrawler\Objects\PendingPlayer;
 
 use Illuminate\View\Factory as View;
 use Illuminate\Http\Request;
@@ -23,6 +25,8 @@ class CampaignController extends \BaseController {
 
     private $app;
 
+    private $user;
+
     public function __construct(View $view, Request $request, Redirect $redirect, App $app)
     {
         $this->beforeFilter('auth');
@@ -33,6 +37,7 @@ class CampaignController extends \BaseController {
         $this->request = $request;
         $this->redirect = $redirect;
         $this->app = $app;
+        $this->user = \Auth::user();
     }
 
     public function getIndex($id)
@@ -120,5 +125,26 @@ class CampaignController extends \BaseController {
     public function postPicture()
     {
 
+    }
+
+    public function postAddPlayer()
+    {
+        try
+        {
+            $campaign = Campaign::where(array('id' => intval($this->request->get('campaign')), 'dm_id' => $this->user->id))->firstOrFail();
+            $user = User::where('email', $this->request->get('email'))->firstOrFail();
+
+            $pending_player = new PendingPlayer();
+            $pending_player->user_id = $user->id;
+            $pending_player->campaign_id = $campaign->id;
+            $pending_player->accept_hash = md5(Carbon::now()) . str_random(32);
+            $pending_player->save();
+
+            return $this->redirect->to('campaign/' . $campaign->id);
+        }
+        catch (ModelNotFoundException $e)
+        {
+            return $this->redirect->to('campaign/' . $this->request->get('campaign'));
+        }
     }
 }

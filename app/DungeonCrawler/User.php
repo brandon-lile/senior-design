@@ -45,6 +45,11 @@ class User extends \Eloquent implements UserInterface, RemindableInterface{
         return $this->hasMany('DungeonCrawler\Objects\Campaign', 'dm_id', 'id');
     }
 
+    public function PendingPlayer()
+    {
+        return $this->hasMany('DungeonCrawler\Objects\PendingPlayer');
+    }
+
     public function getValidatorErrors()
     {
         return $this->errors;

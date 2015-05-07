@@ -34,6 +34,7 @@ Route::patch('campaign/description', 'User\CampaignController@patchDescription')
 Route::post('campaign/entry', 'User\CampaignController@postEntry');
 Route::post('campaign/npc', 'User\CampaignController@postNpc');
 Route::post('campaign/picture', 'User\CampaignController@postPicture');
+Route::post('campaign/addplayer', 'User\CampaignController@postAddPlayer');
 
 // Character Sheet
 Route::get('character/{id}', 'User\CharacterController@getSheet');

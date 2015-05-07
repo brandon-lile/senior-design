@@ -59,4 +59,9 @@ class Campaign extends \Eloquent {
     {
         return $this->hasMany('DungeonCrawler\Objects\CampaignPicture', 'camp_id', 'id');
     }
+
+    public function PendingPlayer()
+    {
+        return $this->hasMany('DungeonCrawler\Objects\PendingPlayer');
+    }
 }

@@ -69,7 +69,7 @@
     <div class="ui hidden divider"></div>
     <div class="eight wide column">
         <div class="ui raised blue segment">
-            <h2 class="ui header">Players <button class="ui blue right floated button" id="add_npc">Invite Player</button></h2>
+            <h2 class="ui header">Players <button class="ui blue right floated button" id="add_player">Invite Player</button></h2>
             <div class="ui divider"></div>
             <div class="slick-slider">
                 @forelse ($campaign->charactersheet as $sheet)
@@ -119,6 +119,7 @@
         </div>
     </div>
     @include('includes.modals.campaign.add_npc')
+    @include('includes.modals.campaign.add_player')
 @stop
 
 @section('inline-js')
@@ -197,6 +198,11 @@
 
                 $('#picture').removeAttr('name'); // cancel upload file.
             }
+        });
+
+        $("#add_player").on("click", function()
+        {
+            $("#add_player_modal").modal('show');
         });
     </script>
 @append

@@ -50,6 +50,7 @@ class CharacterController extends \BaseController{
         $this->character = $character;
         $this->skills = $skillsHelper;
         $this->redirect = $redirect;
+        $this->user = \Auth::user();
     }
 
     public function getSheet($id = 0)
@@ -81,7 +82,8 @@ class CharacterController extends \BaseController{
                                     ->with('skills_output', $this->skills->getSkillsOutputArray())
                                     ->with('ability_ids', $ability_ids)
                                     ->with('skills_choices', $this->skills->getSkillsChoiceDropdown())
-                                    ->with('spell_save', $spell_save);
+                                    ->with('spell_save', $spell_save)
+                                    ->share('pending', $pending_invites);
     }
 
     public function postAvatar()
