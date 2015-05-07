@@ -3,7 +3,7 @@
         <div class="two column row">
             <div class="column">
                 <div class="ui blue segment">
-                    <h2 class="ui dividing header">Managed Campaign</h2>
+                    <h2 class="ui blue dividing header">Managed Campaign</h2>
                     @if (isset($owned_campaigns) && count($owned_campaigns) > 0)
                         <div class="ui divided list selection item-container">
                             @foreach ($owned_campaigns as $campaign)
@@ -18,7 +18,7 @@
                         <div class="ui blue message">You currently do not manage any campaigns. Click the button below to start one.</div>
                     @endif
 
-                    <h2 class="ui dividing header">Campaigns</h2>
+                    <h2 class="ui blue dividing header">Campaigns</h2>
                     @if (isset($campaigns) && count($campaigns) > 0)
                         <div class="ui divided list selection item-container">
                             @foreach($campaigns as $campaign)
@@ -38,7 +38,7 @@
             </div>
             <div class="column">
                 <div class="ui green segment">
-                    <h2 class="ui dividing header">Character Sheets</h2>
+                    <h2 class="ui green dividing header">Character Sheets</h2>
                     @if (isset($sheets) && count($sheets) > 0)
                         <div class="ui divided list selection item-container sheets-container">
                             @foreach ($sheets as $sheet)

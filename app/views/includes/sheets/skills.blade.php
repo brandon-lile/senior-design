@@ -1,5 +1,5 @@
 <div class="ui blue raised segment" id="skills">
-    <h2 class="ui header">Skills</h2>
+    <h2 class="ui blue header">Skills</h2>
     <div class="ui two column grid">
         <div class="column">
             @for ($i = 0; $i < 18; $i++)
