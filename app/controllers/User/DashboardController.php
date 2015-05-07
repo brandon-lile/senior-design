@@ -42,7 +42,7 @@ class DashboardController extends \BaseController {
     public function getIndex()
     {
         $sheets = User::where('id', \Auth::id())
-            ->with('CharacterSheets', 'CharacterSheets.CharacterGeneral', 'CampaignCharacters', 'CampaignCharacters.Campaign', 'OwnedCampaigns')
+            ->with('CharacterSheets', 'CharacterSheets.CharacterGeneral', 'CampaignCharacters', 'CampaignCharacters.Campaign', 'CampaignCharacters.CharacterSheet.CharacterGeneral', 'OwnedCampaigns')
             ->firstOrFail();
 
         $pending_invites = PendingPlayer::where(array('user_id' => $this->user->id, 'accepted' => 0))->with('Campaign')->get();
