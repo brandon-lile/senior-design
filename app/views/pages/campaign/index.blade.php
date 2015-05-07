@@ -96,6 +96,7 @@
                 @forelse ($campaign->campaigncharacter as $sheet)
                     <div>
                         <img src="{{ $sheet->charactersheet->char_pic }}" class="ui centered rounded image avatar-image">
+                        <h4 class="ui header char-pic-name">{{ $sheet->charactersheet->charactergeneral->char_name }}</h4>
                     </div>
                 @empty
                     <div class="ui blue message">There are no players in this campaign. Go make some friends!</div>
