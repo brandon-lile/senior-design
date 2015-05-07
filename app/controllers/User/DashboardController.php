@@ -51,7 +51,8 @@ class DashboardController extends \BaseController {
 
         $this->layout->content = $this->view->make('pages.dashboard.index')
                                     ->with('sheets', $sheets->characterSheets)
-                                    ->with('campaigns', $sheets->ownedCampaigns)
+                                    ->with('owned_campaigns', $sheets->ownedCampaigns)
+                                    ->with('campaigns', $sheets->campaigncharacters)
                                     ->with('race_dropdown', $this->characterGeneral->raceToDropdown())
                                     ->with('alignment_dropdown', $this->characterGeneral->alignmentToDropdown())
                                     ->with('background_dropdown', $this->characterGeneral->backgroundToDropdown())

@@ -3,10 +3,10 @@
         <div class="two column row">
             <div class="column">
                 <div class="ui blue segment">
-                    <h2 class="ui dividing header">Campaigns</h2>
-                    @if (isset($campaigns) && count($campaigns) > 0)
+                    <h2 class="ui dividing header">Managed Campaign</h2>
+                    @if (isset($owned_campaigns) && count($owned_campaigns) > 0)
                         <div class="ui divided list selection item-container">
-                            @foreach ($campaigns as $campaign)
+                            @foreach ($owned_campaigns as $campaign)
                                 <a class="item" href="{{ url('campaign/' . $campaign->id) }}">
                                     <div class="content">
                                         {{ $campaign->campaign_name }}
@@ -15,7 +15,22 @@
                             @endforeach
                         </div>
                     @else
-                        <div class="ui blue message">You currently are not involved in any campaigns. Get a DM to invite you or create your own!</div>
+                        <div class="ui blue message">You currently do not manage any campaigns. Click the button below to start one.</div>
+                    @endif
+
+                    <h2 class="ui dividing header">Campaigns</h2>
+                    @if (isset($campaigns) && count($campaigns) > 0)
+                        <div class="ui divided list selection item-container">
+                            @foreach($campaigns as $campaign)
+                                <a class="item" href="{{ url('campaign/' . $campaign->id) }}">
+                                    <div class="content">
+                                        {{ $campaign->campaign->campaign_name }}
+                                    </div>
+                                </a>
+                            @endforeach
+                        </div>
+                    @else
+                        <div class="ui blue message">You currently are not involved in any campaigns. Get a DM to invite you!</div>
                     @endif
                     <div class="ui divider"></div>
                     <button class="ui blue button" id="add_campaign">Create Campaign</button>

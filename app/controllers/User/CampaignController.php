@@ -43,7 +43,6 @@ class CampaignController extends \BaseController {
 
     public function getIndex($id)
     {
-        // @todo
         try
         {
             $campaign = Campaign::where('id', intval($id))->All()->firstOrFail();
