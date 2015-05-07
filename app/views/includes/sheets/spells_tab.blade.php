@@ -65,7 +65,6 @@
 
         var updateSpell = function updateSpell()
         {
-            console.log($(this).val());
             var spell_id = $(this).attr('id');
             spell_id = spell_id.substr(spell_id.indexOf("_") + 1);
             var params = {
@@ -83,18 +82,41 @@
             });
         };
 
+        var save_level_used = debounce(function()
+        {
+            var level_id = $(this).attr("id");
+            level_id = level_id.substr(level_id.indexOf("_") + 1);
+            var params = {
+                'sheet' : "{{ $sheet->id }}",
+                'level' : level_id,
+                'value' : $(this).val()
+            };
+
+            $.ajax({
+                type : "PATCH",
+                data : params,
+                url : "{{ action('User\CharacterController@patchLevels') }}",
+                success : function(data)
+                {
+
+                }
+            });
+        }, 150);
+
+        $(document).on("change", "#num_data .level-used", save_level_used);
+
         $(document).on("ready", function()
         {
-            var output_spells = function(spells)
+            var output_spells = function(spells, level_total)
             {
                 for (level = 1; level <= 9; level++) {
                     var spell_layout = '<div class="ui raised red segment"><h3 class="ui red header">Level: ' + level + '</h3>Slots Expended**slots_expended**<div class="ui segment equipment-list">' +
                             '<div class="ui divided list">**inner_spell**</div></div></div>';
 
                     // Slots Expended
-                    var spells_slots = '<div class="ui right labeled icon input">' +
+                    var spells_slots = '<div class="ui right labeled icon input" id="num_data">' +
                             '<input type="number" class="slot_num_available" id="slots_level_' + level + '" value="**level_used**">' +
-                            '<div class="ui tag label" id="total_slots_' + level + '">Total: </div>' +
+                            '<input type="number" class="level-used" id="level_' + level + '" value="' + level_total[level] + '" placeholder="Total">' +
                             '</div>';
 
                     // Spells
@@ -168,7 +190,7 @@
 
                     // Start the output
                     output_cantrips(data.cantrips);
-                    output_spells(data.spells);
+                    output_spells(data.spells, data.level_used);
 
                     // Set some options
                     $(".slots_num_available").disabled = true;
@@ -200,6 +222,9 @@
     <style type="text/css">
         .hidden {
             display: none;
+        }
+        .level-used {
+            border-right: 1px solid rgba(0,0,0,.15) !important;
         }
     </style>
 @append

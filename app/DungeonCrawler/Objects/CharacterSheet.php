@@ -9,6 +9,7 @@ use DungeonCrawler\Objects\CharSpell;
 use DungeonCrawler\Objects\Equipment;
 use DungeonCrawler\Objects\Treasure;
 use DungeonCrawler\Objects\Skill;
+use DungeonCrawler\Objects\SpellsUsed;
 
 class CharacterSheet extends \Eloquent {
 
@@ -79,6 +80,11 @@ class CharacterSheet extends \Eloquent {
         return $this->hasMany('DungeonCrawler\Objects\CampaignCharacter', 'sheet_id', 'id');
     }
 
+    public function SpellsUsed()
+    {
+        return $this->hasOne('DungeonCrawler\Objects\SpellsUsed', 'sheet_id', 'id');
+    }
+
     /************************************************************************
      * Boot Method
      ***********************************************************************/
@@ -106,6 +112,10 @@ class CharacterSheet extends \Eloquent {
             $skills = new Skill();
             $charSheet->Skill()->save($skills);
 
+            $spellsUsed = new SpellsUsed();
+            $spellsUsed->spells_used = array(0, 0, 0, 0, 0, 0, 0, 0, 0);
+            $charSheet->SpellsUsed()->save($spellsUsed);
+
             $charSheet->abilities = array(
                 0 => 0,
                 1 => 0,
@@ -127,6 +137,7 @@ class CharacterSheet extends \Eloquent {
             $charSheet->Equipment()->delete();
             $charSheet->CharSpell()->delete();
             $charSheet->Treasure()->delete();
+            $charSheet->SpellsUsed()->delete();
         });
     }
 

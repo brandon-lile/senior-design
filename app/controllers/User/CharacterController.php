@@ -160,11 +160,30 @@ class CharacterController extends \BaseController{
      * Ajax functions
      ***********************************************************************/
 
+    public function patchLevels()
+    {
+        try
+        {
+            $sheet = CharacterSheet::where('id', intval($this->request->get('sheet')))->with('SpellsUsed')->firstOrFail();
+            $new_array = $sheet->spellsused->spells_used;
+            $new_array[$this->request->get('level')] = $this->request->get('value');
+            $sheet->spellsused->spells_used = $new_array;
+            $sheet->spellsused->save();
+
+            return \Response::json($sheet->spellsused);
+
+        }
+        catch (ModelNotFoundException $e)
+        {
+            $this->app->abort(404);
+        }
+    }
+
     public function getSpells($id = 0)
     {
         try
         {
-            $sheet = CharacterSheet::where('id', $id)->with('CharacterGeneral', 'CharacterGeneral.SpellClass', 'CharSpell', 'CharSpell.Spell')->firstOrFail();
+            $sheet = CharacterSheet::where('id', $id)->with('CharacterGeneral', 'CharacterGeneral.SpellClass', 'CharSpell', 'CharSpell.Spell', 'SpellsUsed')->firstOrFail();
 
             // Spells (currently grab all of the same class -- no subclass)
             if (strpos($sheet->charactergeneral->spellclass->class, " ") != false)
@@ -186,6 +205,9 @@ class CharacterController extends \BaseController{
             // Realign
             $spells = $this->character->realignSpells($spells);
 
+            //Get the spell levels used
+            $spells_used = $this->character->realignSpellsUsed($sheet->spellsused);
+
             // Realign the spells the user has
             $used_spells = array();
             foreach($sheet->CharSpell as $charspell)
@@ -197,6 +219,7 @@ class CharacterController extends \BaseController{
             }
 
             $spells['used'] = $used_spells;
+            $spells['level_used'] = $spells_used;
             return \Response::json($spells);
         }
         catch (ModelNotFoundException $e)

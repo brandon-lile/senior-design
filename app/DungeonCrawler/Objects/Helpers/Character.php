@@ -126,4 +126,14 @@ class Character {
             return false;
         }
     }
+
+    public function realignSpellsUsed($used)
+    {
+        $return_spells = array();
+        foreach($used->spells_used as $level => $num)
+        {
+            $return_spells[$level] = $num;
+        }
+        return $return_spells;
+    }
 }

@@ -57,3 +57,4 @@ Route::get('character/avatar/{id}', 'User\CharacterController@deleteAvatar');
 Route::post('character/treasure', 'User\CharacterController@postTreasure');
 Route::delete('character/treasure', 'User\CharacterController@deleteTreasure');
 Route::get('character/delete/{id}', 'User\CharacterController@deleteCharacter');
+Route::patch('character/levels', 'User\CharacterController@patchLevels');
