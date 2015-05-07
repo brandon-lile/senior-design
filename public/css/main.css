@@ -56,3 +56,9 @@
 .delete-button {
     margin-top: 7px !important;
 }
+#add_player {
+    margin-top: -3px;
+}
+#add_npc {
+    margin-top: -3px;
+}
