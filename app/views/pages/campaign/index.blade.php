@@ -27,18 +27,20 @@
                     <div class="ui blue message">There are currently no diary entries. Add one below!</div>
                 @endif
             </div>
-            {{ Form::open(array('url' => action('User\CampaignController@postEntry'), 'class' => 'ui form')) }}
-                {{ Form::hidden('camp', $campaign->id) }}
-                <div class="field">
-                    <div class="ui fluid action input">
-                        {{ Form::text('title', '', array('placeholder' => 'Entry Title')) }}
-                        <button class="ui green submit button">Save</button>
+            @if ($is_dm)
+                {{ Form::open(array('url' => action('User\CampaignController@postEntry'), 'class' => 'ui form')) }}
+                    {{ Form::hidden('camp', $campaign->id) }}
+                    <div class="field">
+                        <div class="ui fluid action input">
+                            {{ Form::text('title', '', array('placeholder' => 'Entry Title')) }}
+                            <button class="ui green submit button">Save</button>
+                        </div>
                     </div>
-                </div>
-                <div class="field">
-                    {{ Form::textarea('entry', '', array('placeholder' => 'Diary Entry', 'class' => 'diary_entry')) }}
-                </div>
-            {{ Form::close() }}
+                    <div class="field">
+                        {{ Form::textarea('entry', '', array('placeholder' => 'Diary Entry', 'class' => 'diary_entry')) }}
+                    </div>
+                {{ Form::close() }}
+            @endif
         </div>
         <div class="ui bottom attached tab segment" data-tab="pictures" id="camp_pics">
             @if(count($campaign->campaignpicture) > 0)
@@ -50,22 +52,24 @@
                     @endforeach
                 </div>
             @else
-                <div class="ui blue message">You currently do not have any saved photos from your campaign. Add them below.</div>
+                <div class="ui blue message">You currently do not have any saved photos from your campaign. @if($is_dm)Add them below.@endif</div>
             @endif
-            <div class="ui divider"></div>
-            {{ Form::open(array('url' => action('User\CampaignController@postPicture'), 'class' => 'ui form', 'files' => true)) }}
-                {{ Form::hidden('campaign', $campaign->id) }}
-                <div class="field">
-                    <div class="ui action input">
-                        <input type="text" id="_picture" placeholder="Campaign Picture">
-                        <label for="picture" class="ui icon button btn-file">
-                            <i class="attach basic icon"></i>
-                            <input type="file" id="picture" name="picture" style="display: none">
-                        </label>
+            @if($is_dm)
+                <div class="ui divider"></div>
+                {{ Form::open(array('url' => action('User\CampaignController@postPicture'), 'class' => 'ui form', 'files' => true)) }}
+                    {{ Form::hidden('campaign', $campaign->id) }}
+                    <div class="field">
+                        <div class="ui action input">
+                            <input type="text" id="_picture" placeholder="Campaign Picture">
+                            <label for="picture" class="ui icon button btn-file">
+                                <i class="attach basic icon"></i>
+                                <input type="file" id="picture" name="picture" style="display: none">
+                            </label>
+                        </div>
                     </div>
-                </div>
-                {{ Form::submit('Add Picture', array('class' => 'ui blue submit button')) }}
-            {{ Form::close() }}
+                    {{ Form::submit('Add Picture', array('class' => 'ui blue submit button')) }}
+                {{ Form::close() }}
+            @endif
         </div>
     </div>
 
@@ -73,7 +77,11 @@
     <div class="eight wide column">
         <div class="ui red tall stacked segment">
             <h2 class="ui header">Campaign Description</h2>
-            {{ Form::textarea('camp_desc', $campaign->description, array('id' => 'camp_desc', 'class' => 'camp_desc')) }}
+            @if($is_dm)
+                {{ Form::textarea('camp_desc', $campaign->description, array('id' => 'camp_desc', 'class' => 'camp_desc')) }}
+            @else
+                <p>{{ $campaign->description }}</p>
+            @endif
         </div>
     </div>
 
@@ -81,7 +89,7 @@
     <div class="ui hidden divider"></div>
     <div class="eight wide column">
         <div class="ui raised blue segment">
-            <h2 class="ui header">Players <button class="ui blue right floated button" id="add_player">Invite Player</button></h2>
+            <h2 class="ui header">Players @if($is_dm)<button class="ui blue right floated button" id="add_player">Invite Player</button>@endif</h2>
             <div class="ui divider"></div>
             <div class="slick-slider">
                 @forelse ($campaign->campaigncharacter as $sheet)
@@ -98,7 +106,7 @@
     <!-- NPCS -->
     <div class="eight wide column">
         <div class="ui raised green segment">
-            <h2 class="ui header">NPCs <button class="ui green right floated button" id="add_npc">Add NPC</button></h2>
+            <h2 class="ui header">NPCs @if($is_dm)<button class="ui green right floated button" id="add_npc">Add NPC</button>@endif</h2>
             <div class="ui divider"></div>
             <div class="npc-container">
                 @if(count($campaign->npc) > 0)
@@ -115,92 +123,96 @@
             </div>
         </div>
     </div>
-    @include('includes.modals.campaign.add_npc')
-    @include('includes.modals.campaign.add_player')
+    @if ($is_dm)
+        @include('includes.modals.campaign.add_npc')
+        @include('includes.modals.campaign.add_player')
+    @endif
 @stop
 
 @section('inline-js')
     <script type="text/javascript">
         $('.menu .item').tab();
 
-        var save_desc = debounce(function(){
-            var params = {
-                'camp_id' : "{{ $campaign->id }}",
-                'val' : $(this).val()
-            };
-
-            $.ajax({
-                type: "PATCH",
-                data : params,
-                url : "{{ action('User\CampaignController@patchDescription') }}",
-                success : function(data) {
-
-                }
-            });
-        }, 250);
-
         $(document).on("ready", function()
         {
             @if(count($campaign->charactersheet) > 0)
-                $(".slick-slider").slick({
-                    slidesToShow : 3,
-                    slidesToScroll : 1,
-                    autoplay : true,
-                    autoplayspeed : 1500,
-                    infinite: true
-                });
+            $(".slick-slider").slick({
+                slidesToShow : 3,
+                slidesToScroll : 1,
+                autoplay : true,
+                autoplayspeed : 1500,
+                infinite: true
+            });
             @endif
 
             $("#camp_desc").on("change", save_desc);
         });
 
-        $("#add_npc").on("click", function()
-        {
-            $("#npc_modal").modal('show');
-        });
+        @if($is_dm)
+            var save_desc = debounce(function(){
+                var params = {
+                    'camp_id' : "{{ $campaign->id }}",
+                    'val' : $(this).val()
+                };
 
-        var fileExtentionRange = '.png .jpg .jpeg';
-        var MAX_SIZE = 30; // MB
+                $.ajax({
+                    type: "PATCH",
+                    data : params,
+                    url : "{{ action('User\CampaignController@patchDescription') }}",
+                    success : function(data) {
 
-        $(document).on('change', '#camp_pics .btn-file :file', function() {
-            var input = $(this);
+                    }
+                });
+            }, 250);
 
-            if (navigator.appVersion.indexOf("MSIE") != -1) { // IE
-                var label = input.val();
+            $("#add_npc").on("click", function()
+            {
+                $("#npc_modal").modal('show');
+            });
 
-                input.trigger('fileselect', [ 1, label, 0 ]);
-            } else {
-                var label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-                var numFiles = input.get(0).files ? input.get(0).files.length : 1;
-                var size = input.get(0).files[0].size;
+            var fileExtentionRange = '.png .jpg .jpeg';
+            var MAX_SIZE = 30; // MB
 
-                input.trigger('fileselect', [ numFiles, label, size ]);
-            }
-        });
+            $(document).on('change', '#camp_pics .btn-file :file', function() {
+                var input = $(this);
 
-        $('#camp_pics .btn-file :file').on('fileselect', function(event, numFiles, label, size) {
-            $('#picture').attr('name', 'picture'); // allow upload.
+                if (navigator.appVersion.indexOf("MSIE") != -1) { // IE
+                    var label = input.val();
 
-            var postfix = label.substr(label.lastIndexOf('.'));
-            if (fileExtentionRange.indexOf(postfix.toLowerCase()) > -1) {
-                if (size > 1024 * 1024 * MAX_SIZE ) {
-                    alert('max size：<strong>' + MAX_SIZE + '</strong> MB.');
+                    input.trigger('fileselect', [ 1, label, 0 ]);
+                } else {
+                    var label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                    var numFiles = input.get(0).files ? input.get(0).files.length : 1;
+                    var size = input.get(0).files[0].size;
+
+                    input.trigger('fileselect', [ numFiles, label, size ]);
+                }
+            });
+
+            $('#camp_pics .btn-file :file').on('fileselect', function(event, numFiles, label, size) {
+                $('#picture').attr('name', 'picture'); // allow upload.
+
+                var postfix = label.substr(label.lastIndexOf('.'));
+                if (fileExtentionRange.indexOf(postfix.toLowerCase()) > -1) {
+                    if (size > 1024 * 1024 * MAX_SIZE ) {
+                        alert('max size：<strong>' + MAX_SIZE + '</strong> MB.');
+
+                        $('#picture').removeAttr('name'); // cancel upload file.
+                    } else {
+                        $('#_picture').val(label);
+                    }
+                } else {
+                    alert('file type：<br/> <strong>' + fileExtentionRange + '</strong>');
 
                     $('#picture').removeAttr('name'); // cancel upload file.
-                } else {
-                    $('#_picture').val(label);
                 }
-            } else {
-                alert('file type：<br/> <strong>' + fileExtentionRange + '</strong>');
+            });
 
-                $('#picture').removeAttr('name'); // cancel upload file.
-            }
-        });
-
-        $("#add_player").on("click", function()
-        {
-            $("#add_player_modal").modal('show');
-        });
+            $("#add_player").on("click", function()
+            {
+                $("#add_player_modal").modal('show');
+            });
+        @endif
     </script>
 @append
 

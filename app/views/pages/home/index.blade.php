@@ -15,7 +15,7 @@
         <h3 style="text-align: center;">Easily Manage Characters</h3>
         <p>Our character pages are designed to make the character creation process as painless as possible so you can get
             your group started on their quest quickly.  Once you get started, Campaign Crawler makes it easy to update
-            stats along the way and will track of the changes you make so you can easily pick up the game at your
+            stats along the way and will keep track of the changes you make so you can easily pick up the game at your
             next meeting!</p>
     </div>
     <div class="ui red inverted segment">

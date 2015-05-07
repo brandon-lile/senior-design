@@ -46,10 +46,16 @@ class CampaignController extends \BaseController {
         try
         {
             $campaign = Campaign::where('id', intval($id))->All()->firstOrFail();
+            $dm = false;
+            if ($campaign->dm_id == $this->user->id)
+            {
+                $dm = true;
+            }
 
             $this->layout->content = $this->view->make('pages.campaign.index')
                 ->with('campaign', $campaign)
-                ->with('user', $this->user);
+                ->with('user', $this->user)
+                ->with('is_dm', $dm);;
         }
         catch (ModelNotFoundException $e)
         {
