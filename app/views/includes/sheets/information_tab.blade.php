@@ -2,8 +2,7 @@
 
     <div class="row">
         <div class="ui sixteen wide column">
-            <div class="ui center aligned divided grid">
-                <div class="equal height row">
+            <div class="ui center aligned divided stackable grid">
                     <div class="twelve wide column">
                         <!-- Character Information -->
                         @include('includes.sheets.backstory')
@@ -12,7 +11,6 @@
                     <div class="four wide column">
                         @include('includes.sheets.misc')
                     </div>
-                </div>
             </div>
         </div>
     </div>

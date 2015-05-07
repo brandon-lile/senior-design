@@ -1,4 +1,4 @@
-<div class="ui form" id="class_dropdowns">
+<div class="ui fluid form" id="class_dropdowns">
     <div class="three fields">
         <div class="field">
             {{ Form::label('class', 'Class') }}

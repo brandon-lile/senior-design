@@ -1,7 +1,7 @@
 <div class="ui active tab" data-tab="stats">
 
     <div class="row">
-        <div class="ui three column divided equal height grid">
+        <div class="ui three column divided equal height stackable grid">
             <div class="column">
                 <h2 class="ui header">Stats</h2>
                 @include('includes.sheets.stats')
