@@ -113,6 +113,7 @@
                 @if(count($campaign->npc) > 0)
                     @foreach($campaign->npc as $npc)
                         <div class="ui vertical segment">
+                            <a class="right floated compact ui button" href="{{ action('User\CampaignController@deleteNPC', $npc->id) }}">Delete NPC</a>
                             <img class="ui left floated tiny image npc" src="{{ $npc->npc_pic }}">
                             <div class="header">{{ $npc->name }}</div>
                             <p>{{ $npc->desc }}</p>
@@ -144,7 +145,6 @@
                 autoplayspeed : 1500,
                 infinite: true
             });
-            $(".slick-slider").reload();
             @endif
         });
 

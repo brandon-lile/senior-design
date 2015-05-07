@@ -206,4 +206,22 @@ class CampaignController extends \BaseController {
             return $this->redirect->to('dashboard');
         }
     }
+
+    public function deleteNPC($id)
+    {
+        try {
+            $npc = Npc::where('id', intval($id))->with('Campaign')->firstOrFail();
+
+            if ($npc->campaign->dm_id == $this->user->id)
+            {
+                $npc->delete();
+            }
+
+            return $this->redirect->to('campaign/' . $npc->campaign->id);
+        }
+        catch (ModelNotFoundException $e)
+        {
+            $this->app->abort(404);
+        }
+    }
 }

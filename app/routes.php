@@ -36,6 +36,7 @@ Route::post('campaign/npc', 'User\CampaignController@postNpc');
 Route::post('campaign/picture', 'User\CampaignController@postPicture');
 Route::post('campaign/addplayer', 'User\CampaignController@postAddPlayer');
 Route::get('campaign/delete/{id}', 'User\CampaignController@deleteCampaign');
+Route::get('campaign/npc/delete/{id}', 'User\CampaignController@deleteNPC');
 
 // Character Sheet
 Route::get('character/{id}', 'User\CharacterController@getSheet');

@@ -70,6 +70,9 @@
     margin-left: 40px !important;
     margin-top: -10px !important;
 }
+.npc-container {
+    overflow: hidden;
+}
 @media only screen and (max-width: 767px) {
 
 }
