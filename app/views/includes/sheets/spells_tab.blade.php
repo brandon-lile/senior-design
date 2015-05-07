@@ -6,7 +6,7 @@
                 <div class="equal height row">
                     <div class="sixteen wide column">
                         <div class="ui blue raised segment">
-                            <h2 class="ui header">Spell Information</h2>
+                            <h2 class="ui blue header">Spell Information</h2>
                             <div class="ui form">
                                 <div class="fields">
                                     <div class="four wide field">

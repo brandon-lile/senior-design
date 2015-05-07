@@ -1,7 +1,7 @@
 @section('content')
     <div class="ui blue segment">
+        <h2 class="ui blue dividing header">Login</h2>
         {{ Form::open(array('url' => 'login', 'class' => 'ui form')) }}
-            <h2 class="ui dividing header">Login</h2>
             <div class="field">
                 {{ Form::label('email', 'Email') }}
                 {{ Form::text('email', '', array('placeholder' => 'Email', 'id' => 'email')) }}

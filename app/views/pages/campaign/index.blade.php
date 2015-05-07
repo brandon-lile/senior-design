@@ -76,7 +76,7 @@
     <!-- Campaign Description -->
     <div class="eight wide column">
         <div class="ui red tall stacked segment">
-            <h2 class="ui header">Campaign Description</h2>
+            <h2 class="ui red dividing header">Campaign Description</h2>
             @if($is_dm)
                 {{ Form::textarea('camp_desc', $campaign->description, array('id' => 'camp_desc', 'class' => 'camp_desc')) }}
             @else
@@ -89,8 +89,7 @@
     <div class="ui hidden divider"></div>
     <div class="eight wide column">
         <div class="ui raised blue segment">
-            <h2 class="ui header">Players @if($is_dm)<button class="ui blue right floated button" id="add_player">Invite Player</button>@endif</h2>
-            <div class="ui divider"></div>
+            <h2 class="ui blue dividing header">Players @if($is_dm)<button class="ui blue right floated button" id="add_player">Invite Player</button>@endif</h2>
             <div class="slick-slider">
                 @forelse ($campaign->campaigncharacter as $sheet)
                     <div>
@@ -106,8 +105,7 @@
     <!-- NPCS -->
     <div class="eight wide column">
         <div class="ui raised green segment">
-            <h2 class="ui header">NPCs @if($is_dm)<button class="ui green right floated button" id="add_npc">Add NPC</button>@endif</h2>
-            <div class="ui divider"></div>
+            <h2 class="ui green dividing header">NPCs @if($is_dm)<button class="ui green right floated button" id="add_npc">Add NPC</button>@endif</h2>
             <div class="npc-container">
                 @if(count($campaign->npc) > 0)
                     @foreach($campaign->npc as $npc)
