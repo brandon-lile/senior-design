@@ -1,6 +1,6 @@
 @section('content')
     <div class="ui blue segment">
-        <h2 class="ui dividing header">Register</h2>
+        <h2 class="ui blue dividing header">Register</h2>
         {{ Form::open(array('url' => 'register', 'class' => 'ui form')) }}
             <div class="field">
                 {{ Form::label('username', 'Username') }}

@@ -1,5 +1,5 @@
 <div class="ui green raised segment" id="misc">
-    <h2 class="ui header">Misc.</h2>
+    <h2 class="ui green header">Misc.</h2>
     <div class="ui form" id="misc">
         <div class="field">
             {{ Form::label('traits', 'Personality Traits') }}

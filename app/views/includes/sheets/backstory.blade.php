@@ -1,5 +1,5 @@
 <div class="ui green raised segment" id="char_info">
-    <h2 class="ui header">Character Information</h2>
+    <h2 class="ui green header">Character Information</h2>
         <div class="ui form">
             <div class="fields">
                 <div class="five wide field">
@@ -36,6 +36,12 @@
             <div class="field">
                 {{ Form::label('backstory', 'Character Backstory') }}
                 {{ Form::textarea('backstory', $sheet->charactergeneral->backstory, array('id' => 'backstory')) }}
+            </div>
+        </div>
+        <div class="ui form" style="padding-top:10px">
+            <div class="field">
+                {{ Form::label('traits', 'Features and Traits') }}
+                {{ Form::textarea('traits', $sheet->features, array('id' => 'traits')) }}
             </div>
         </div>
 </div>

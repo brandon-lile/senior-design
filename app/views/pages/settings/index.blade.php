@@ -1,7 +1,7 @@
 @section('content')
     <div class="ui grid">
         <div class="sixteen wide column">
-            <h2 class="ui dividing header">Update settings</h2>
+            <h2 class="ui dividing header">Update Settings</h2>
             <div class="ui styled fluid accordion">
                 <div class = "title">
                     <div class = "ui three column grid">
