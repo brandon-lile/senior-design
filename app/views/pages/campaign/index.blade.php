@@ -42,12 +42,19 @@
         </div>
         <div class="ui bottom attached tab segment" data-tab="pictures" id="camp_pics">
             @if(count($campaign->campaignpicture) > 0)
-
+                <div class="slick-slider">
+                    @foreach($campaign->campaignpicture as $pic)
+                        <div>
+                            <img src="{{ $pic->pic_filename }}" class="ui centered rounded image avatar-image">
+                        </div>
+                    @endforeach
+                </div>
             @else
                 <div class="ui blue message">You currently do not have any saved photos from your campaign. Add them below.</div>
             @endif
             <div class="ui divider"></div>
             {{ Form::open(array('url' => action('User\CampaignController@postPicture'), 'class' => 'ui form', 'files' => true)) }}
+                {{ Form::hidden('campaign', $campaign->id) }}
                 <div class="field">
                     <div class="ui action input">
                         <input type="text" id="_picture" placeholder="Campaign Picture">
@@ -172,7 +179,7 @@
         });
 
         $('#camp_pics .btn-file :file').on('fileselect', function(event, numFiles, label, size) {
-            $('#picture').attr('name', 'avatar'); // allow upload.
+            $('#picture').attr('name', 'picture'); // allow upload.
 
             var postfix = label.substr(label.lastIndexOf('.'));
             if (fileExtentionRange.indexOf(postfix.toLowerCase()) > -1) {

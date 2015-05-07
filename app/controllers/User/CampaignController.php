@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use DungeonCrawler\Objects\Campaign;
+use DungeonCrawler\Objects\CampaignPicture;
 use DungeonCrawler\Objects\DiaryEntry;
 use DungeonCrawler\Objects\Npc;
 use DungeonCrawler\User as User;
@@ -127,8 +128,26 @@ class CampaignController extends \BaseController {
     {
         try
         {
-            $campaign = Campaign::where(array('id' => intval($this->request->get('campaign'), 'dm_id' => intval($this->user->id))))->firstOrFail();
+            $campaign = Campaign::where(array('id' => intval($this->request->get('campaign')), 'dm_id' => intval($this->user->id)))->firstOrFail();
 
+            $photo = $this->request->file('picture');
+            if($photo != null)
+            {
+                $pic = new CampaignPicture();
+                $random = md5(Carbon::now()) . str_random(16);
+                $extension = $photo->getClientOriginalExtension();
+
+                $photo->move(public_path('images/uploads'), $random . "." . $extension);
+                $pic->pic_filename = $random;
+                $pic->pic_ext = $extension;
+                $campaign->CampaignPicture()->save($pic);
+
+                return $this->redirect->to('campaign/' . $campaign->id);
+            }
+            else
+            {
+                return $this->redirect->to('campaign/' . $campaign->id);
+            }
         }
         catch (ModelNotFoundException $e)
         {
