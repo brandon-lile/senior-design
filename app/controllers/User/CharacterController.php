@@ -56,34 +56,41 @@ class CharacterController extends \BaseController{
     public function getSheet($id = 0)
     {
         // @todo - Add link to campaign page
-        $sheet = CharacterSheet::where('id', $id)->All()->first();
-        $sheet->abilities = $this->character->prettifyAbilities($sheet->abilities, true);
-        $sheet->savingthrows->abilities = $this->character->prettifyAbilities($sheet->savingthrows->abilities, false);
-        $ability_ids = $this->character->abilityIdToName();
-        $ability_ids[null] = "None";
-
-        // Spell save and spell attack
-        $spell_save = 0;
-        if ($sheet->charactergeneral->spellclass->ability == null)
+        try
         {
-            $spell_save = 8 + $sheet->charactergeneral->proficiency_bonus;
-        }
-        else
-        {
-            $spell_save = 8 + $sheet->charactergeneral->proficiency_bonus + $sheet->abilities[$sheet->charactergeneral->spellclass->ability]['bonus'];
-        }
+            $sheet = CharacterSheet::where(array('id' => intval($id), 'user_id' => $this->user->id))->All()->firstOrFail();
+            $sheet->abilities = $this->character->prettifyAbilities($sheet->abilities, true);
+            $sheet->savingthrows->abilities = $this->character->prettifyAbilities($sheet->savingthrows->abilities, false);
+            $ability_ids = $this->character->abilityIdToName();
+            $ability_ids[null] = "None";
 
-        $this->layout->content = $this->view->make('pages.character.sheet')
-                                    ->with('class_dropdown', $this->characterGeneral->classToDropdown())
-                                    ->with('background_dropdown', $this->characterGeneral->backgroundToDropdown())
-                                    ->with('alignment_dropdown', $this->characterGeneral->alignmentToDropdown())
-                                    ->with('race_dropdown', $this->characterGeneral->raceToDropdown())
-                                    ->with('sheet', $sheet)
-                                    ->with('skills_output', $this->skills->getSkillsOutputArray())
-                                    ->with('ability_ids', $ability_ids)
-                                    ->with('skills_choices', $this->skills->getSkillsChoiceDropdown())
-                                    ->with('spell_save', $spell_save)
-                                    ->with('user', $this->user);
+            // Spell save and spell attack
+            $spell_save = 0;
+            if ($sheet->charactergeneral->spellclass->ability == null)
+            {
+                $spell_save = 8 + $sheet->charactergeneral->proficiency_bonus;
+            }
+            else
+            {
+                $spell_save = 8 + $sheet->charactergeneral->proficiency_bonus + $sheet->abilities[$sheet->charactergeneral->spellclass->ability]['bonus'];
+            }
+
+            $this->layout->content = $this->view->make('pages.character.sheet')
+                ->with('class_dropdown', $this->characterGeneral->classToDropdown())
+                ->with('background_dropdown', $this->characterGeneral->backgroundToDropdown())
+                ->with('alignment_dropdown', $this->characterGeneral->alignmentToDropdown())
+                ->with('race_dropdown', $this->characterGeneral->raceToDropdown())
+                ->with('sheet', $sheet)
+                ->with('skills_output', $this->skills->getSkillsOutputArray())
+                ->with('ability_ids', $ability_ids)
+                ->with('skills_choices', $this->skills->getSkillsChoiceDropdown())
+                ->with('spell_save', $spell_save)
+                ->with('user', $this->user);
+        }
+        catch (ModelNotFoundException $e)
+        {
+            $this->app->abort(404);
+        }
     }
 
     public function postAvatar()
