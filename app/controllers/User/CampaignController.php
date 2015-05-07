@@ -173,6 +173,17 @@ class CampaignController extends \BaseController {
             $pending_player->accept_hash = md5(Carbon::now()) . str_random(32);
             $pending_player->save();
 
+            $email_info = array(
+                'camp_name' => $campaign->campaign_name,
+                'username' => $user->username
+            );
+
+            \Mail::send('emails.added_to_campaign', $email_info, function($message) use ($user, $campaign)
+            {
+                $message->from('brandon.lile@gmail.com', 'DungeonCrawler');
+                $message->to($user['email'], $user['username'])->subject("You've been invited to the " . $campaign->campaign_name . " campaign!");
+            });
+
             return $this->redirect->to('campaign/' . $campaign->id);
         }
         catch (ModelNotFoundException $e)
