@@ -67,7 +67,7 @@
 }
 .char-pic-name {
     position : relative;
-    margin-left: 75px !important;
+    margin-left: 40px !important;
     margin-top: -10px !important;
 }
 @media only screen and (max-width: 767px) {
