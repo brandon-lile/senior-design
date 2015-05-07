@@ -44,10 +44,12 @@
         </div>
         <div class="ui bottom attached tab segment" data-tab="pictures" id="camp_pics">
             @if(count($campaign->campaignpicture) > 0)
-                <div class="slick-slider">
+                <div class="ui three column grid">
                     @foreach($campaign->campaignpicture as $pic)
-                        <div>
-                            <img src="{{ $pic->pic_filename }}" class="ui centered rounded image avatar-image">
+                        <div class="column">
+                            <div class="ui segment">
+                                <img src="{{ $pic->pic_filename }}" class="ui centered fluid rounded image avatar-image">
+                            </div>
                         </div>
                     @endforeach
                 </div>
@@ -141,6 +143,7 @@
                 autoplayspeed : 1500,
                 infinite: true
             });
+            $(".slick-slider").reload();
             @endif
         });
 
