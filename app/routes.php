@@ -35,6 +35,7 @@ Route::post('campaign/entry', 'User\CampaignController@postEntry');
 Route::post('campaign/npc', 'User\CampaignController@postNpc');
 Route::post('campaign/picture', 'User\CampaignController@postPicture');
 Route::post('campaign/addplayer', 'User\CampaignController@postAddPlayer');
+Route::get('campaign/delete/{id}', 'User\CampaignController@deleteCampaign');
 
 // Character Sheet
 Route::get('character/{id}', 'User\CharacterController@getSheet');
@@ -55,3 +56,4 @@ Route::post('character/avatar', 'User\CharacterController@postAvatar');
 Route::get('character/avatar/{id}', 'User\CharacterController@deleteAvatar');
 Route::post('character/treasure', 'User\CharacterController@postTreasure');
 Route::delete('character/treasure', 'User\CharacterController@deleteTreasure');
+Route::get('character/delete/{id}', 'User\CharacterController@deleteCharacter');

@@ -48,7 +48,8 @@ class CampaignController extends \BaseController {
             $campaign = Campaign::where('id', intval($id))->All()->firstOrFail();
 
             $this->layout->content = $this->view->make('pages.campaign.index')
-                ->with('campaign', $campaign);
+                ->with('campaign', $campaign)
+                ->with('user', $this->user);
         }
         catch (ModelNotFoundException $e)
         {
@@ -124,7 +125,15 @@ class CampaignController extends \BaseController {
 
     public function postPicture()
     {
+        try
+        {
+            $campaign = Campaign::where(array('id' => intval($this->request->get('campaign'), 'dm_id' => intval($this->user->id))))->firstOrFail();
 
+        }
+        catch (ModelNotFoundException $e)
+        {
+            $this->app->abort(404);
+        }
     }
 
     public function postAddPlayer()
@@ -145,6 +154,21 @@ class CampaignController extends \BaseController {
         catch (ModelNotFoundException $e)
         {
             return $this->redirect->to('campaign/' . $this->request->get('campaign'));
+        }
+    }
+
+    public function deleteCampaign($id = 0)
+    {
+        try
+        {
+            $campaign = Campaign::where(array('id' => intval($id), 'dm_id' => intval($this->user->id)))->firstOrFail();
+            $campaign->delete();
+
+            return $this->redirect->to('dashboard');
+        }
+        catch (ModelNotFoundException $e)
+        {
+            return $this->redirect->to('dashboard');
         }
     }
 }

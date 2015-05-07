@@ -31,10 +31,37 @@
             </div>
         </div>
     </div>
+    <div class="divider"></div>
+    <h3 class="ui header">Death Saves</h3>
+    <div class="inline fields" id="save_successes">
+        <label for="save_successes">Successes</label>
+        <div class="field">
+            <input type="checkbox" class="ui checkbox">
+        </div>
+        <div class="field">
+            <input type="checkbox" class="ui checkbox">
+        </div>
+        <div class="field">
+            <input type="checkbox" class="ui checkbox">
+        </div>
+    </div>
+    <div class="inline fields" id="save_failures">
+        <label for="save_successes">Failures</label>
+        <div class="field">
+            <input type="checkbox" class="ui checkbox">
+        </div>
+        <div class="field">
+            <input type="checkbox" class="ui checkbox">
+        </div>
+        <div class="field">
+            <input type="checkbox" class="ui checkbox">
+        </div>
+    </div>
 </div>
 
 @section('inline-js')
     <script type="text/javascript">
+        $("#save_successes .checkbox").checkbox();
         $("#char_hp").on("change", "input[type=number]", function()
         {
             var params = {

@@ -69,4 +69,18 @@ class Campaign extends \Eloquent {
     {
         return $this->hasMany('DungeonCrawler\Objects\PendingPlayer');
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        Campaign::deleting(function($camp)
+        {
+            $camp->PendingPlayer()->delete();
+            $camp->CampaignPicture()->delete();
+            $camp->NPC()->delete();
+            $camp->CampaignCharacter()->delete();
+            $camp->DiaryEntry()->delete();
+        });
+    }
 }

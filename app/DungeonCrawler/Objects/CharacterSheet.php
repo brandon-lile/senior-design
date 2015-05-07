@@ -3,6 +3,12 @@
 use DungeonCrawler\Objects\CharacterHP;
 use DungeonCrawler\Objects\Helpers\Character;
 use DungeonCrawler\Objects\SavingThrow;
+use DungeonCrawler\Objects\CampaignCharacter;
+use DungeonCrawler\Objects\CharacterGeneral;
+use DungeonCrawler\Objects\CharSpell;
+use DungeonCrawler\Objects\Equipment;
+use DungeonCrawler\Objects\Treasure;
+use DungeonCrawler\Objects\Skill;
 
 class CharacterSheet extends \Eloquent {
 
@@ -68,6 +74,11 @@ class CharacterSheet extends \Eloquent {
         return $this->hasMany('DungeonCrawler\Objects\Treasure', 'sheet_id', 'id');
     }
 
+    public function CampaignCharacter()
+    {
+        return $this->hasMany('DungeonCrawler\Objects\CampaignCharacter', 'sheet_id', 'id');
+    }
+
     /************************************************************************
      * Boot Method
      ***********************************************************************/
@@ -104,6 +115,18 @@ class CharacterSheet extends \Eloquent {
                 5 => 0
             );
             $charSheet->save();
+        });
+
+        CharacterSheet::deleting(function($charSheet)
+        {
+            $charSheet->CharacterHP()->delete();
+            $charSheet->CharacterGeneral()->delete();
+            $charSheet->CampaignCharacter()->delete();
+            $charSheet->SavingThrows()->delete();
+            $charSheet->Skill()->delete();
+            $charSheet->Equipment()->delete();
+            $charSheet->CharSpell()->delete();
+            $charSheet->Treasure()->delete();
         });
     }
 

@@ -83,7 +83,7 @@ class CharacterController extends \BaseController{
                                     ->with('ability_ids', $ability_ids)
                                     ->with('skills_choices', $this->skills->getSkillsChoiceDropdown())
                                     ->with('spell_save', $spell_save)
-                                    ->share('pending', $pending_invites);
+                                    ->with('user', $this->user);
     }
 
     public function postAvatar()
@@ -127,6 +127,21 @@ class CharacterController extends \BaseController{
             $sheet->save();
 
             return $this->redirect->to('character/' . $sheet->id);
+        }
+        catch (ModelNotFoundException $e)
+        {
+            $this->app->abort(404);
+        }
+    }
+
+    public function deleteCharacter($id = 0)
+    {
+        try
+        {
+            $sheet = CharacterSheet::where(array('id' => intval($id), 'user_id' => intval($this->user->id)))->firstOrFail();
+            $sheet->delete();
+
+            return $this->redirect->to('dashboard');
         }
         catch (ModelNotFoundException $e)
         {
@@ -408,7 +423,7 @@ class CharacterController extends \BaseController{
     {
         try
         {
-            $info_attr = array('age', 'height', 'weight', 'eyes', 'skin', 'hair', 'backstory', 'traits', 'ideals', 'bonds');
+            $info_attr = array('age', 'height', 'weight', 'eyes', 'skin', 'hair', 'backstory', 'traits', 'ideals', 'bonds', 'flaws');
             $sheet = CharacterSheet::where('id', intval($this->request->get('sheet')))->with('CharacterGeneral')->firstOrFail();
 
             if (in_array($this->request->get('field'), $info_attr))

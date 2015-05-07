@@ -25,10 +25,9 @@
                 <div class="ui green segment">
                     <h2 class="ui dividing header">Character Sheets</h2>
                     @if (isset($sheets) && count($sheets) > 0)
-                        <div class="ui divided list selection item-container">
+                        <div class="ui divided list selection item-container sheets-container">
                             @foreach ($sheets as $sheet)
-                                <a class="item" href="{{ url('character') . "/" . $sheet->id }}">
-                                    <div class="right floated compact ui red button">Delete</div>
+                                <a class="item" href="{{ url('character/' . $sheet->id) }}">
                                     <div class="content">
                                         {{ $sheet->charactergeneral->char_name }}
                                     </div>
@@ -46,6 +45,9 @@
         <div class="two column row">
             <div class="column">
                 @include('includes.dashboard.pending')
+            </div>
+            <div column="column">
+
             </div>
         </div>
     </div>

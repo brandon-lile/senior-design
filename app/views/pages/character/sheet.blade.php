@@ -1,9 +1,12 @@
 @section('content')
-    <h1 class="ui red header">Pyro's Character Sheet - Jocelyn</h1>
+    <h1 class="ui red header">
+        {{ $user->username }}'s Character Sheet - {{ $sheet->charactergeneral->char_name }}
+        <a class="right floated compact ui red button delete-button" href="{{ action('User\CharacterController@deleteCharacter', $sheet->id) }}">Delete</a>
+    </h1>
 
     <div class="ui divider"></div>
 
-    <div class="ui divided equal height row">
+    <div class="ui sixteen wide stackable grid">
         <div class="four wide column">
             <div class="ui segment">
                 <img src="{{ $sheet->char_pic }}" class="ui centered rounded image avatar-image">
@@ -21,8 +24,8 @@
         <div class="twelve wide column">
             @include('includes.sheets.class_dropdowns')
         </div>
-
     </div>
+
 
     <div class="ui divider"></div>
 

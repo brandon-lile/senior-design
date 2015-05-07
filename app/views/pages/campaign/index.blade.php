@@ -1,5 +1,10 @@
 @section('content')
-    <h1 class="ui header">{{ $campaign->campaign_name }}</h1>
+    <h1 class="ui dividing header">
+        {{ $campaign->campaign_name }}
+        @if ($campaign->dm_id == $user->id)
+            <a href="{{ action('User\CampaignController@deleteCampaign', $campaign->id) }}" class="ui right floated blue button mini delete-button">Delete</a>
+        @endif
+    </h1>
 
     <!-- General Info -->
     <div class="eight wide column">
@@ -47,7 +52,7 @@
                     <div class="ui action input">
                         <input type="text" id="_picture" placeholder="Campaign Picture">
                         <label for="picture" class="ui icon button btn-file">
-                            <i class="attachment basic icon"></i>
+                            <i class="attach basic icon"></i>
                             <input type="file" id="picture" name="picture" style="display: none">
                         </label>
                     </div>

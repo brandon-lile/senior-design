@@ -57,7 +57,8 @@ class DashboardController extends \BaseController {
                                     ->with('background_dropdown', $this->characterGeneral->backgroundToDropdown())
                                     ->with('class_dropdown', $this->characterGeneral->classToDropdown())
                                     ->with('pending', $pending_invites)
-                                    ->with('sheets_dropdown', $sheets_dropdown);
+                                    ->with('sheets_dropdown', $sheets_dropdown)
+                                    ->with('user', $this->user);
     }
 
     public function postCreateCampaign()

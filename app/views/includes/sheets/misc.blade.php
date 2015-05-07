@@ -13,5 +13,9 @@
             {{ Form::label('bonds', 'Bonds') }}
             {{ Form::textarea('bonds', $sheet->charactergeneral->bonds) }}
         </div>
+        <div class="field">
+            {{ Form::label('flaws', 'Flaws') }}
+            {{ Form::textarea('flaws', $sheet->charactergeneral->flaws) }}
+        </div>
     </div>
 </div>

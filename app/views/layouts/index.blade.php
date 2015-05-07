@@ -8,9 +8,9 @@
 
 @section('main')
     <div class="ui stackable grid">
-        <!--<div class="three wide column">
+        <div class="sixteen wide column">
             @include('includes.globals.navigation.nav')
-        </div>-->
+        </div>
         <div class="sixteen wide column">
             <div class="ui stackable grid segment">
                 @yield('content')

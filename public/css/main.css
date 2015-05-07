@@ -50,3 +50,9 @@
     padding-top: 10px;
     padding-bottom: 5px;
 }
+.brand {
+    height: 50px;
+}
+.delete-button {
+    margin-top: 7px !important;
+}

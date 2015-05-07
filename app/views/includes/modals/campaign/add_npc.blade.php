@@ -14,7 +14,7 @@
                 <div class="ui action input">
                     <input type="text" id="_avatar" placeholder="NPC photo">
                     <label for="avatar" class="ui icon button btn-file">
-                        <i class="attachment basic icon"></i>
+                        <i class="attach basic icon"></i>
                         <input type="file" id="avatar" name="avatar" style="display: none">
                     </label>
                 </div>

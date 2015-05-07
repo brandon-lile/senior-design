@@ -86,7 +86,7 @@
             });
         });
 
-        $("#treasure-items .delete").on("click", function()
+        $("#treasure-items").on("click", ".delete", function()
         {
             var treasure_id = $(this).attr('id');
             treasure_id = treasure_id.substr(treasure_id.indexOf("_") + 1);

@@ -47,7 +47,6 @@
                                         "<div class=\"header\">" + data.name + "</div>" +
                                     "</div>" +
                                 "</div>");
-                        num_equipment++;
                     } else {
                         $("#equipment_list").append(
                                 "<div class=\"item\">" +
@@ -57,6 +56,7 @@
                                     "</div>" +
                                 "</div>");
                     }
+                    num_equipment++;
 
                     $("input[name=equipment]").val("");
                 }
