@@ -8,7 +8,7 @@
     <div class="ui orange inverted segment">
         <h3 style="text-align: center;">Keep Track of Campaigns</h3>
         <p>Campagin Crawler gives your Dungeons and Dragons group a central location to store information about your
-            campaign so you can keep group members up to date with meeting locations and times, and if you are unable
+            campaign so you can keep group members up to date with meeting locations and times, and if you are unable to
             meet for a few weeks you can look up the notes from your last meeting.</p>
     </div>
     <div class="ui green inverted segment">
