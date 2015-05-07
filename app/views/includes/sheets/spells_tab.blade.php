@@ -34,30 +34,26 @@
         </div>
     </div>
 
-    <div class="ui segment">
         <div class="ui active inverted dimmer" id="spells_dimmer">
             <div class="ui active text loader">Loading Spells</div>
         </div>
         <div class="row">
             <div class="ui sixteen wide column">
-                <div class="ui center aligned divided grid">
-                    <div class="equal height row" id="spells_container">
-                        <div class="five wide column" id="first_column">
+                <div class="ui center aligned divided three column stackable grid" id="spells_container">
+                        <div class="column" id="first_column">
 
                         </div>
 
-                        <div class="five wide column" id="second_column">
+                        <div class="column" id="second_column">
 
                         </div>
 
-                        <div class="five wide column" id="third_column">
+                        <div class="column" id="third_column">
 
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
-    </div>
 </div>
 
 @section('inline-js')
@@ -110,7 +106,7 @@
             var output_spells = function(spells, level_total)
             {
                 for (level = 1; level <= 9; level++) {
-                    var spell_layout = '<div class="ui raised red segment"><h3 class="ui red header">Level: ' + level + '</h3>Slots Expended**slots_expended**<div class="ui segment equipment-list">' +
+                    var spell_layout = '<div class="ui raised red segment"><h3 class="ui red header">Level: ' + level + '</h3>Slots Expended  /  Slots Total**slots_expended**<div class="ui segment equipment-list">' +
                             '<div class="ui divided list">**inner_spell**</div></div></div>';
 
                     // Slots Expended
@@ -225,6 +221,13 @@
         }
         .level-used {
             border-right: 1px solid rgba(0,0,0,.15) !important;
+        }
+        .equipment-list {
+            overflow: scroll;
+            z-index:1000;
+        }
+        .equipment-list .item {
+            z-index:-1000;
         }
     </style>
 @append
