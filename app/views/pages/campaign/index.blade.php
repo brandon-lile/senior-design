@@ -76,21 +76,6 @@
                     <div>
                         <img src="{{ $sheet->char_pic }}" class="ui centered rounded image avatar-image">
                     </div>
-                    <div>
-                        <img src="{{ $sheet->char_pic }}" class="ui centered rounded image avatar-image">
-                    </div>
-                    <div>
-                        <img src="{{ $sheet->char_pic }}" class="ui centered rounded image avatar-image">
-                    </div>
-                    <div>
-                        <img src="{{ $sheet->char_pic }}" class="ui centered rounded image avatar-image">
-                    </div>
-                    <div>
-                        <img src="{{ $sheet->char_pic }}" class="ui centered rounded image avatar-image">
-                    </div>
-                    <div>
-                        <img src="{{ $sheet->char_pic }}" class="ui centered rounded image avatar-image">
-                    </div>
                 @empty
                     <div class="ui blue message">There are no players in this campaign. Go make some friends!</div>
                 @endforelse
