@@ -144,8 +144,6 @@
                 infinite: true
             });
             @endif
-
-            $("#camp_desc").on("change", save_desc);
         });
 
         @if($is_dm)
@@ -169,6 +167,8 @@
             {
                 $("#npc_modal").modal('show');
             });
+
+            $("#camp_desc").on("change", save_desc);
 
             var fileExtentionRange = '.png .jpg .jpeg';
             var MAX_SIZE = 30; // MB
