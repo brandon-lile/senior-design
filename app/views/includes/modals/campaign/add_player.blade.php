@@ -9,7 +9,7 @@
                 {{ Form::text('email', '', array('placeholder' => 'User email', 'id' => 'email')) }}
             </div>
             <div class="ui blue message">If the email exists as a user in our database, we will send them an invite.</div>
-            {{ Form::submit('Create Campaign!', array('class' => 'ui blue submit button')) }}
+            {{ Form::submit('Invite Player', array('class' => 'ui blue submit button')) }}
         {{ Form::close() }}
     </div>
 </div>
