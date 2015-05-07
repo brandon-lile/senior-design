@@ -100,7 +100,7 @@ class Character {
             $return_invites = array();
             foreach($pending as $invite)
             {
-                $return_invites[$invite->id] = $invite->campaign->campaign_name;
+                $return_invites[$invite->campaign_id] = $invite->campaign->campaign_name;
             }
             return $return_invites;
         }
